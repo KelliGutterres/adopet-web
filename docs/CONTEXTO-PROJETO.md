@@ -72,10 +72,21 @@ Cada parte do sistema terá seu próprio repositório Git. Manter este documento
 | `adopet-web` | React — painel da ONG (administração) |
 | `adopet-mobile` | React Native — usuário |
 
-Estrutura sugerida do backend (quando a fase de IA começar):
+Estrutura sugerida (todos os repos):
+
+```
+adopet-*/ 
+├── specs/               # Specs SDD — obrigatório antes de implementar
+├── docs/                # Contexto do projeto (este arquivo)
+├── .cursor/rules/       # Regras para a IA
+└── ...                  # código (src/, app/, ai/, etc.)
+```
+
+Backend (quando a fase de IA começar):
 
 ```
 adopet-backend/
+├── specs/
 ├── src/                 # API Node.js
 ├── ai/                  # Python — comparação de imagens
 ├── docs/
@@ -83,6 +94,21 @@ adopet-backend/
 ```
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
+
+### Spec-Driven Development (SDD) — obrigatório
+
+Toda implementação **deve** ter especificação escrita **antes** do código, seguindo SDD.
+
+| Regra | Detalhe |
+|-------|---------|
+| Onde | Pasta `specs/` em **cada** repositório (`adopet-backend`, `adopet-web`, `adopet-mobile`) |
+| Quando | Antes de arquitetar ou codar a feature/fatia |
+| O quê | Objetivo, escopo, RF/RNF, contratos (API/UI), critérios de pronto, fora de escopo |
+| Fluxo | Spec em `specs/` → revisão/alinhamento → implementação → atualizar spec se a decisão mudar |
+
+Convenção sugerida de nomes: `specs/NNN-nome-curto.md` (ex.: `specs/001-auth-jwt.md`).
+
+A IA **não** deve implementar feature sem spec correspondente em `specs/` (salvo correção trivial explícita).
 
 ---
 
@@ -240,12 +266,14 @@ Com isso, a seção abaixo será preenchida com PK/FK, tipos e cardinalidade. At
 8. Ao fechar decisões (Prisma, JWT, endpoints, schema), **atualizar este arquivo**.
 9. Priorizar alinhamento com RF/RNF da Parte 1.
 10. Tratar RF0008 (IA) como módulo isolado **dentro do backend** — pode vir depois de auth + CRUD + storage no MVP incremental.
+11. **SDD:** criar/atualizar spec em `specs/` **antes** de implementar; toda feature relevante precisa de especificação.
 
 ### Modelo de prompt
 
 ```
 Contexto: seguir docs/CONTEXTO-PROJETO.md e .cursor/rules/
 
+Spec: specs/[arquivo].md (criar/atualizar antes de codar — SDD)
 Tarefa: [o que fazer]
 Escopo: [mobile | web | backend]
 RF/RNF relacionados: [ex.: RF0004, RNF0002]
@@ -331,6 +359,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-07-27 | MVP = CRUD (criar/editar/excluir) antes do restante | Decisão do autor |
 | 2026-07-27 | Persistência com **Prisma** (ORM) sobre PostgreSQL | Decisão do autor |
 | 2026-08-02 | Apenas 2 atores: **Usuário** e **ONG** (ONG = admin; sem role admin separado) | Decisão do autor |
+| 2026-08-03 | **SDD** obrigatório: spec em `specs/` antes de cada implementação; pasta em todos os repos | Decisão do autor |
 
 ---
 
@@ -341,6 +370,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Auth: JWT
 - [x] 3 repositórios separados (IA no backend)
 - [x] MVP: CRUD primeiro
+- [x] SDD + pasta `specs/` em cada repositório
 - [ ] Padronizar envelope de resposta da API e códigos de erro
 - [ ] Anexar protótipos/diagramas em `docs/` (opcional)
 
@@ -356,3 +386,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-07-27 | Ajuste: `adopet-ai-service` unificado ao `adopet-backend` |
 | 2026-07-27 | Decisão: Prisma como ORM |
 | 2026-08-02 | Atores: Usuário e ONG (ONG é o admin) |
+| 2026-08-03 | SDD obrigatório; pasta `specs/` em backend, web e mobile |
