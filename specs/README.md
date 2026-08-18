@@ -10,3 +10,10 @@ Especificações obrigatórias **antes** de implementar (Spec-Driven Development
 - Atualizar a spec se a decisão mudar durante a implementação.
 
 Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
+
+## Índice
+
+| Spec | Tema | Status |
+|------|------|--------|
+| [001](./001-estrutura-inicial-web.md) | Scaffold Vite + React (painel ONG) | aprovada e implementada |
+| [002](./002-login-ong.md) | Tela de login da ONG + JWT + esqueci senha | aguardando aprovação |

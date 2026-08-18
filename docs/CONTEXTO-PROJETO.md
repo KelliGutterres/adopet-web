@@ -93,6 +93,27 @@ adopet-backend/
 └── ...
 ```
 
+Web (`adopet-web`, spec 001):
+
+```
+adopet-web/
+├── specs/
+├── docs/
+├── public/
+├── src/
+│   ├── pages/
+│   ├── components/
+│   ├── services/        # api.js (fetch + VITE_API_URL)
+│   ├── hooks/
+│   ├── styles/          # global.css
+│   ├── App.jsx
+│   └── main.jsx
+├── index.html
+└── vite.config.js
+```
+
+> Login JWT, `/painel` e AuthContext entram na spec 002.
+
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
 ### Spec-Driven Development (SDD) — obrigatório
@@ -126,6 +147,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Telas de protótipo: autenticação/cadastro; listagem de animais
 
 ### Web (ONG = administrador do painel)
+- [x] Scaffold Vite + React (spec 001)
 - [ ] Autenticação da ONG (e-mail/senha) — RF0009
 - [ ] Painel de gerenciamento de animais — RF0010
 - [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
@@ -155,7 +177,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 | Camada | Tecnologia | Papel |
 |--------|------------|--------|
 | Mobile | React Native | App multiplataforma Android/iOS |
-| Web | React (ReactJS) | Painel da ONG; UI responsiva |
+| Web | React (ReactJS) + **Vite** | Painel da ONG; UI responsiva; JavaScript |
 | Backend | Node.js | Regras de negócio, auth, orquestração, API REST |
 | Banco | PostgreSQL | Dados estruturados (usuários, animais, etc.) |
 | Storage | Supabase Storage | Imagens; referências/URLs no PostgreSQL |
@@ -305,8 +327,11 @@ Critério de pronto: [comportamento verificável]
 - Resposta HTTP consistente (sucesso + erro padronizado).
 
 ### Web (React)
-- Componentes funcionais; páginas / componentes / serviços / hooks.
+- Vite + React (JavaScript); componentes funcionais; páginas / componentes / serviços / hooks.
+- Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
+- Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
+- Rotas: `/` placeholder (spec 001); `/login` e `/painel` na spec 002.
 
 ### Mobile (React Native)
 - Organização por feature quando possível.
@@ -360,6 +385,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-07-27 | Persistência com **Prisma** (ORM) sobre PostgreSQL | Decisão do autor |
 | 2026-08-02 | Apenas 2 atores: **Usuário** e **ONG** (ONG = admin; sem role admin separado) | Decisão do autor |
 | 2026-08-03 | **SDD** obrigatório: spec em `specs/` antes de cada implementação; pasta em todos os repos | Decisão do autor |
+| 2026-08-17 | Web: Vite + React + JS; CSS Modules; `fetch`; rota do painel `/painel` | Spec 001 / autora |
 
 ---
 
@@ -373,6 +399,8 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] SDD + pasta `specs/` em cada repositório
 - [ ] Padronizar envelope de resposta da API e códigos de erro
 - [ ] Anexar protótipos/diagramas em `docs/` (opcional)
+- [x] Scaffold do painel web (Vite + React — spec 001)
+- [ ] Login da ONG no painel web (spec 002)
 
 ---
 
@@ -387,3 +415,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-07-27 | Decisão: Prisma como ORM |
 | 2026-08-02 | Atores: Usuário e ONG (ONG é o admin) |
 | 2026-08-03 | SDD obrigatório; pasta `specs/` em backend, web e mobile |
+| 2026-08-17 | Scaffold web (spec 001): Vite + React JS, pastas, `fetch`, CSS Modules |
