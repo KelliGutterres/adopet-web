@@ -1,7 +1,6 @@
 # Spec 002 — Tela de login da ONG (painel web)
 
-> **Status:** aguardando refinamento / aprovação.  
-> **Não implementar** até a autora aprovar esta spec **e** a spec 001.  
+> **Status:** aprovada e implementada.  
 > Depende de: spec 001 (scaffold Vite + pastas); backend specs 003 (login JWT) e 006 (esqueci senha).  
 > **Não altera** o `adopet-backend`.
 
@@ -260,42 +259,44 @@ Fluxo: página → `useAuth` / context → `authService` → `api.js` (`fetch`) 
 5. Credencial de **usuário** no formulário da ONG → 401 “Credenciais inválidas” (comportamento correto da API).
 6. Após `PUT` de senha, **não** autenticar automaticamente — voltar ao login.
 
-## Decisões técnicas (propostas)
+## Decisões técnicas (fechadas na aprovação)
 
-| Item | Proposta | Refinar? |
-|------|----------|----------|
-| Storage | `localStorage` (casa com JWT `7d`) | sim — `sessionStorage`? |
-| Esqueci senha | **nesta** spec (link no login) | sim — adiar? |
-| Cadastro ONG | **fora** (spec seguinte) | sim |
-| Pós-login | `/painel` placeholder | sim — já listar animais? |
-| Visual | card + paleta acima até ter Fig. 14 | sim |
-| Context vs Redux | `AuthContext` | |
-| “Mostrar senha” | olho no input | sim — incluir? |
+| Item | Escolha |
+|------|---------|
+| Storage | `localStorage` (casa com JWT `7d`) |
+| Esqueci senha | nesta spec (link no login) |
+| Cadastro ONG | fora (spec seguinte) |
+| Pós-login | `/painel` placeholder (CRUD = spec 003) |
+| Visual | card + paleta desta spec até ter Fig. 14 |
+| Context vs Redux | `AuthContext` |
+| Mostrar senha | sim (botão no input) |
 
 ## Pontos abertos para refinamento
 
-1. **Figura 14** — seguir o protótipo da Parte 1 ou a paleta desta spec até anexar o print?
-2. **Esqueci senha agora ou depois?** — proposta: agora (API pronta; fluxo começa no login).
-3. **Cadastro de ONG no web nesta fatia?** — proposta: não (login primeiro).
-4. **`localStorage` vs `sessionStorage`** — proposta: `localStorage`.
-5. **Placeholder vs já entrar no CRUD de animais** — proposta: placeholder; CRUD = spec 003.
-6. **Mostrar/ocultar senha** — proposta: sim (usabilidade).
-7. Copy dos títulos/botões — ajustar se a banca/protótipo usar outros textos.
+Fechados em 2026-08-17:
+
+1. **Figura 14** — paleta desta spec até anexar o print.
+2. **Esqueci senha agora** — sim (API pronta; fluxo começa no login).
+3. **Cadastro de ONG nesta fatia** — não.
+4. **`localStorage`** (não `sessionStorage`).
+5. **Placeholder** em `/painel`; CRUD = spec 003.
+6. **Mostrar/ocultar senha** — sim.
+7. Copy dos títulos/botões — textos desta spec.
 
 ## Critérios de pronto
 
-- [ ] Spec aprovada (pontos 1–7 fechados)
-- [ ] Spec 001 já implementada
-- [ ] Login com `ong@adopet.local` / `senha123` entra no `/painel`
-- [ ] Senha errada ou e-mail de usuário → mensagem “Credenciais inválidas”, permanece em `/login`
-- [ ] Token e `ong` no `localStorage`; senha nunca persistida
-- [ ] Recarregar a página autenticada mantém a sessão (token válido)
-- [ ] Token expirado / `papel !== "ong"` → volta ao login
-- [ ] `/painel` sem token redireciona para `/login`
-- [ ] Esqueci senha: `PUT` 204 + login posterior com a senha nova
-- [ ] Layout usável em largura estreita
-- [ ] Backend intocado
-- [ ] CONTEXTO atualizado (checklist RF0009 web)
+- [x] Spec aprovada (pontos 1–7 fechados)
+- [x] Spec 001 já implementada
+- [x] Login com `ong@adopet.local` / `senha123` entra no `/painel`
+- [x] Senha errada ou e-mail de usuário → mensagem “Credenciais inválidas”, permanece em `/login`
+- [x] Token e `ong` no `localStorage`; senha nunca persistida
+- [x] Recarregar a página autenticada mantém a sessão (token válido)
+- [x] Token expirado / `papel !== "ong"` → volta ao login
+- [x] `/painel` sem token redireciona para `/login`
+- [x] Esqueci senha: `PUT` 204 + login posterior com a senha nova
+- [x] Layout usável em largura estreita
+- [x] Backend intocado
+- [x] CONTEXTO atualizado (checklist RF0009 web)
 
 ## Como validar (após implementação)
 

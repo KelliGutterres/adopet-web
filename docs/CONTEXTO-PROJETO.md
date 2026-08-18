@@ -103,7 +103,8 @@ adopet-web/
 ├── src/
 │   ├── pages/
 │   ├── components/
-│   ├── services/        # api.js (fetch + VITE_API_URL)
+│   ├── context/         # AuthContext (spec 002)
+│   ├── services/        # api.js (fetch + VITE_API_URL); authService
 │   ├── hooks/
 │   ├── styles/          # global.css
 │   ├── App.jsx
@@ -112,7 +113,7 @@ adopet-web/
 └── vite.config.js
 ```
 
-> Login JWT, `/painel` e AuthContext entram na spec 002.
+> Login JWT, `/painel` e AuthContext: spec 002.
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
@@ -148,7 +149,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 
 ### Web (ONG = administrador do painel)
 - [x] Scaffold Vite + React (spec 001)
-- [ ] Autenticação da ONG (e-mail/senha) — RF0009
+- [x] Autenticação da ONG (e-mail/senha) — RF0009 (spec 002)
 - [ ] Painel de gerenciamento de animais — RF0010
 - [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
@@ -331,7 +332,8 @@ Critério de pronto: [comportamento verificável]
 - Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
 - Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
-- Rotas: `/` placeholder (spec 001); `/login` e `/painel` na spec 002.
+- Rotas: `/` redireciona; `/login`, `/esqueci-senha` (públicas); `/painel` (JWT ONG).
+- Sessão: JWT + dados da ONG em `localStorage`; `Authorization: Bearer` no `api.js`.
 
 ### Mobile (React Native)
 - Organização por feature quando possível.
@@ -386,6 +388,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-02 | Apenas 2 atores: **Usuário** e **ONG** (ONG = admin; sem role admin separado) | Decisão do autor |
 | 2026-08-03 | **SDD** obrigatório: spec em `specs/` antes de cada implementação; pasta em todos os repos | Decisão do autor |
 | 2026-08-17 | Web: Vite + React + JS; CSS Modules; `fetch`; rota do painel `/painel` | Spec 001 / autora |
+| 2026-08-17 | Login web ONG: JWT em `localStorage`; `/auth/ongs/login`; esqueci senha | Spec 002 / autora |
 
 ---
 
@@ -400,7 +403,8 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [ ] Padronizar envelope de resposta da API e códigos de erro
 - [ ] Anexar protótipos/diagramas em `docs/` (opcional)
 - [x] Scaffold do painel web (Vite + React — spec 001)
-- [ ] Login da ONG no painel web (spec 002)
+- [x] Login da ONG no painel web (spec 002)
+- [ ] CRUD de animais (painel Web)
 
 ---
 
@@ -416,3 +420,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-02 | Atores: Usuário e ONG (ONG é o admin) |
 | 2026-08-03 | SDD obrigatório; pasta `specs/` em backend, web e mobile |
 | 2026-08-17 | Scaffold web (spec 001): Vite + React JS, pastas, `fetch`, CSS Modules |
+| 2026-08-17 | Login ONG no web (spec 002): JWT, `/painel` placeholder, esqueci senha |

@@ -19,6 +19,10 @@ body {
   background: #f7f4ef;
 }
 
+button {
+  font-family: inherit;
+}
+
 a {
   color: inherit;
 }

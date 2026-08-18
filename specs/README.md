@@ -16,4 +16,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | Spec | Tema | Status |
 |------|------|--------|
 | [001](./001-estrutura-inicial-web.md) | Scaffold Vite + React (painel ONG) | aprovada e implementada |
-| [002](./002-login-ong.md) | Tela de login da ONG + JWT + esqueci senha | aguardando aprovação |
+| [002](./002-login-ong.md) | Tela de login da ONG + JWT + esqueci senha | aprovada e implementada |
