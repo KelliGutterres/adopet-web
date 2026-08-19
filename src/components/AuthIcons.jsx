@@ -58,6 +58,35 @@ export function LogInIcon() {
   );
 }
 
+export function BuildingIcon() {
+  return (
+    <svg {...svgProps}>
+      <path d="M4 21V6a1 1 0 0 1 1-1h7v16" />
+      <path d="M12 21h8V10a1 1 0 0 0-1-1h-7" />
+      <path d="M7 8h.01M7 12h.01M7 16h.01M16 13h.01M16 17h.01" />
+    </svg>
+  );
+}
+
+export function MapPinIcon() {
+  return (
+    <svg {...svgProps}>
+      <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
+export function UserPlusIcon() {
+  return (
+    <svg {...svgProps}>
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M19 8v6M22 11h-6" />
+    </svg>
+  );
+}
+
 export function ShieldIcon() {
   return (
     <svg {...svgProps} width={14} height={14}>

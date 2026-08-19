@@ -19,3 +19,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | [002](./002-login-ong.md) | Tela de login da ONG + JWT + esqueci senha | aprovada e implementada |
 | [003](./003-listagem-animais.md) | Listagem de animais no painel (A / P / E) | aprovada e implementada |
 | [004](./004-layout-login.md) | Layout do login conforme o protótipo (sem OAuth) | aprovada e implementada |
+| [005](./005-cadastro-ong.md) | Cadastro da ONG no painel (mesmo layout do login) | aprovada e implementada |

@@ -106,6 +106,7 @@
 .formPanel {
   display: flex;
   flex-direction: column;
+  min-height: 0;
   padding: 1.35rem 2.1rem 1.15rem;
   background: var(--painel-surface);
 }
@@ -125,6 +126,9 @@
 }
 
 .signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.38rem 0.95rem;
   border: 1.5px solid var(--painel-primary);
   border-radius: 8px;
@@ -133,11 +137,17 @@
   font: inherit;
   font-size: 0.88rem;
   font-weight: 700;
-  cursor: not-allowed;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.signup:disabled {
-  opacity: 1;
+.signup:hover {
+  background: #f3eaff;
+}
+
+.signup:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
 }
 
 .formMain {
@@ -149,6 +159,8 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 1.25rem 0;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .formFooter {

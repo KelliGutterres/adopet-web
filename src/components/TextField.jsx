@@ -10,11 +10,16 @@ export default function TextField({
   placeholder,
   name,
   icon,
+  maxLength,
+  className,
 }) {
+  const wrapClass = [styles.inputWrap, icon ? '' : styles.noIcon].filter(Boolean).join(' ');
+  const fieldClass = [styles.field, className].filter(Boolean).join(' ');
+
   return (
-    <div className={styles.field}>
+    <div className={fieldClass}>
       <label htmlFor={id}>{label}</label>
-      <div className={styles.inputWrap}>
+      <div className={wrapClass}>
         {icon ? <span className={styles.iconLeft}>{icon}</span> : null}
         <input
           id={id}
@@ -24,6 +29,7 @@ export default function TextField({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          maxLength={maxLength}
         />
       </div>
     </div>

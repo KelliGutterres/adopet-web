@@ -6,6 +6,7 @@ import PainelLayout from '@/layouts/PainelLayout.jsx';
 import AnimaisListPage from '@/pages/AnimaisListPage.jsx';
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage.jsx';
 import LoginPage from '@/pages/LoginPage.jsx';
+import RegisterPage from '@/pages/RegisterPage.jsx';
 import styles from './App.module.css';
 
 function RootRedirect() {
@@ -35,6 +36,14 @@ export default function App() {
           element={
             <PublicOnlyRoute>
               <LoginPage />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/cadastro"
+          element={
+            <PublicOnlyRoute>
+              <RegisterPage />
             </PublicOnlyRoute>
           }
         />

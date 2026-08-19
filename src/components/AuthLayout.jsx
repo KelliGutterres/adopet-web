@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
 import { ShieldIcon } from './AuthIcons.jsx';
 import PawLogo from './PawLogo.jsx';
 import styles from './AuthLayout.module.css';
 
-export default function AuthLayout({ children }) {
+export default function AuthLayout({ children, variant = 'login' }) {
+  const isCadastro = variant === 'cadastro';
+
   return (
     <main className={styles.page}>
       <section className={styles.card}>
@@ -34,16 +37,12 @@ export default function AuthLayout({ children }) {
 
         <div className={styles.formPanel}>
           <div className={styles.formHeader}>
-            <p className={styles.signupHint}>Não tem uma conta?</p>
-            <button
-              className={styles.signup}
-              type="button"
-              disabled
-              title="Em breve"
-              aria-label="Cadastre-se (em breve)"
-            >
-              Cadastre-se
-            </button>
+            <p className={styles.signupHint}>
+              {isCadastro ? 'Já tem uma conta?' : 'Não tem uma conta?'}
+            </p>
+            <Link className={styles.signup} to={isCadastro ? '/login' : '/cadastro'}>
+              {isCadastro ? 'Entrar' : 'Cadastre-se'}
+            </Link>
           </div>
           <div className={styles.formMain}>{children}</div>
           <p className={styles.formFooter}>

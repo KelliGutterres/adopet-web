@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { me as fetchMe, loginOng } from '@/services/authService.js';
+import { cadastrarOng, me as fetchMe, loginOng } from '@/services/authService.js';
 import {
   clearSession,
   readStoredOng,
@@ -78,6 +78,12 @@ export function AuthProvider({ children }) {
       isAuthenticated: Boolean(token),
       async login({ email, senha }) {
         const result = await loginOng({ email, senha });
+        saveSession(result.token, result.ong);
+        setToken(result.token);
+        setOng(result.ong);
+      },
+      async cadastrar({ nome, email, senha, cidade }) {
+        const result = await cadastrarOng({ nome, email, senha, cidade });
         saveSession(result.token, result.ong);
         setToken(result.token);
         setOng(result.ong);

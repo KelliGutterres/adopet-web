@@ -154,6 +154,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
+- [x] Cadastro de ONG no painel web (spec 005)
 - [ ] Telas de protótipo: cadastro de animal; edição/gerenciamento
 
 ### Backend (Node.js)
@@ -333,7 +334,7 @@ Critério de pronto: [comportamento verificável]
 - Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
 - Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
-- Rotas: `/` redireciona; `/login`, `/esqueci-senha` (públicas); `/painel` (JWT ONG).
+- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel` (JWT ONG).
 - Sessão: JWT + dados da ONG em `localStorage`; `Authorization: Bearer` no `api.js`.
 
 ### Mobile (React Native)
@@ -391,7 +392,8 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-17 | Web: Vite + React + JS; CSS Modules; `fetch`; rota do painel `/painel` | Spec 001 / autora |
 | 2026-08-17 | Login web ONG: JWT em `localStorage`; `/auth/ongs/login`; esqueci senha | Spec 002 / autora |
 | 2026-08-19 | Painel web: listagem A/P/E (todos os tutores); só leitura; sem gênero/data; login verde permanece | Spec 003 / autora |
-| 2026-08-19 | Login web no layout do print (`login-web.png`); paleta roxa; sem Google/Apple; Cadastre-se visível e inativo | Spec 004 / autora |
+| 2026-08-19 | Login web no layout do print (`login-web.png`); paleta roxa; sem Google/Apple | Spec 004 / autora |
+| 2026-08-19 | Cadastro ONG no web: `/cadastro`, mesmo layout do login; login automático; UF texto | Spec 005 / autora |
 
 ---
 
@@ -410,6 +412,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Login da ONG no painel web (spec 002)
 - [x] Listagem de animais no painel web (spec 003)
 - [x] Layout do login web conforme o print (spec 004; sem OAuth)
+- [x] Cadastro de ONG no web (spec 005)
 - [ ] CRUD de animais (painel Web)
 
 ---
@@ -429,3 +432,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-17 | Login ONG no web (spec 002): JWT, `/painel` placeholder, esqueci senha |
 | 2026-08-19 | Listagem de animais no painel (spec 003): sidebar, tabela A/P/E, GET `/animais?status=` |
 | 2026-08-19 | Layout do login web (spec 004): split marca + formulário, protótipo `login-web.png` |
+| 2026-08-19 | Cadastro ONG no web (spec 005): `/cadastro`, mesmo layout, login automático, UF texto |
