@@ -150,7 +150,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 ### Web (ONG = administrador do painel)
 - [x] Scaffold Vite + React (spec 001)
 - [x] Autenticação da ONG (e-mail/senha) — RF0009 (spec 002)
-- [ ] Painel de gerenciamento de animais — RF0010
+- [x] Listagem de animais no painel (adoção, encontrados, perdidos) — RF0004 / RF0010 parcial (spec 003)
 - [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
 - [ ] Telas de protótipo: login web; cadastro de animal; edição/gerenciamento
@@ -389,6 +389,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-03 | **SDD** obrigatório: spec em `specs/` antes de cada implementação; pasta em todos os repos | Decisão do autor |
 | 2026-08-17 | Web: Vite + React + JS; CSS Modules; `fetch`; rota do painel `/painel` | Spec 001 / autora |
 | 2026-08-17 | Login web ONG: JWT em `localStorage`; `/auth/ongs/login`; esqueci senha | Spec 002 / autora |
+| 2026-08-19 | Painel web: listagem A/P/E (todos os tutores); só leitura; sem gênero/data; login verde permanece | Spec 003 / autora |
 
 ---
 
@@ -402,8 +403,10 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] SDD + pasta `specs/` em cada repositório
 - [ ] Padronizar envelope de resposta da API e códigos de erro
 - [ ] Anexar protótipos/diagramas em `docs/` (opcional)
+- [x] Protótipos web de login e listagem em `docs/prototipos/` (spec 003)
 - [x] Scaffold do painel web (Vite + React — spec 001)
 - [x] Login da ONG no painel web (spec 002)
+- [x] Listagem de animais no painel web (spec 003)
 - [ ] CRUD de animais (painel Web)
 
 ---
@@ -421,3 +424,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-03 | SDD obrigatório; pasta `specs/` em backend, web e mobile |
 | 2026-08-17 | Scaffold web (spec 001): Vite + React JS, pastas, `fetch`, CSS Modules |
 | 2026-08-17 | Login ONG no web (spec 002): JWT, `/painel` placeholder, esqueci senha |
+| 2026-08-19 | Listagem de animais no painel (spec 003): sidebar, tabela A/P/E, GET `/animais?status=` |

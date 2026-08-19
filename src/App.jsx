@@ -2,9 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '@/components/ProtectedRoute.jsx';
 import PublicOnlyRoute from '@/components/PublicOnlyRoute.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
+import PainelLayout from '@/layouts/PainelLayout.jsx';
+import AnimaisListPage from '@/pages/AnimaisListPage.jsx';
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage.jsx';
 import LoginPage from '@/pages/LoginPage.jsx';
-import PainelPage from '@/pages/PainelPage.jsx';
 import styles from './App.module.css';
 
 function RootRedirect() {
@@ -42,10 +43,13 @@ export default function App() {
           path="/painel"
           element={
             <ProtectedRoute>
-              <PainelPage />
+              <PainelLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<Navigate to="animais/adocao" replace />} />
+          <Route path="animais/:situacao" element={<AnimaisListPage />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BootGate>

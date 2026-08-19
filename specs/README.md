@@ -17,3 +17,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 |------|------|--------|
 | [001](./001-estrutura-inicial-web.md) | Scaffold Vite + React (painel ONG) | aprovada e implementada |
 | [002](./002-login-ong.md) | Tela de login da ONG + JWT + esqueci senha | aprovada e implementada |
+| [003](./003-listagem-animais.md) | Listagem de animais no painel (A / P / E) | aprovada e implementada |

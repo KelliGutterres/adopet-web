@@ -1,0 +1,14 @@
+:root {
+  --painel-primary: #7c3aed;
+  --painel-primary-hover: #6d28d9;
+  --painel-primary-soft: #f3e8ff;
+  --painel-bg: #f3f4f6;
+  --painel-surface: #ffffff;
+  --painel-text: #111827;
+  --painel-muted: #6b7280;
+  --painel-border: #e5e7eb;
+  --painel-danger: #dc2626;
+  --painel-danger-soft: #fef2f2;
+  --painel-radius: 10px;
+  --painel-sidebar-width: 260px;
+}

@@ -1,6 +1,6 @@
 import { TOKEN_KEY } from './session.js';
 
-const DEFAULT_API_URL = 'http://localhost:3000';
+const DEFAULT_API_URL = import.meta.env.DEV ? '' : 'http://127.0.0.1:3000';
 const NETWORK_ERROR_MESSAGE =
   'Não foi possível conectar à API. Verifique se o backend está no ar.';
 
