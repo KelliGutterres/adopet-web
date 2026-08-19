@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import styles from './AuthCard.module.css';
+import { EyeIcon, EyeOffIcon, LockIcon } from './AuthIcons.jsx';
+import styles from './AuthForm.module.css';
 
 export default function PasswordField({
   id,
@@ -7,14 +8,17 @@ export default function PasswordField({
   value,
   onChange,
   autoComplete,
-  placeholder = 'Senha',
+  placeholder = 'Digite sua senha',
 }) {
   const [visible, setVisible] = useState(false);
 
   return (
     <div className={styles.field}>
       <label htmlFor={id}>{label}</label>
-      <div className={styles.inputWrap}>
+      <div className={`${styles.inputWrap} ${styles.hasToggle}`}>
+        <span className={styles.iconLeft}>
+          <LockIcon />
+        </span>
         <input
           id={id}
           type={visible ? 'text' : 'password'}
@@ -29,7 +33,7 @@ export default function PasswordField({
           onClick={() => setVisible((current) => !current)}
           aria-label={visible ? 'Ocultar senha' : 'Mostrar senha'}
         >
-          {visible ? 'Ocultar' : 'Mostrar'}
+          {visible ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       </div>
     </div>

@@ -4,7 +4,6 @@ import PainelHeader from '@/components/PainelHeader.jsx';
 import Sidebar from '@/components/Sidebar.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
 import styles from './PainelLayout.module.css';
-import '@/styles/tokens.css';
 
 export default function PainelLayout() {
   const { ong } = useAuth();

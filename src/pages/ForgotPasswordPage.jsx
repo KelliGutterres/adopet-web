@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AuthCard from '@/components/AuthCard.jsx';
+import AuthLayout from '@/components/AuthLayout.jsx';
 import PasswordField from '@/components/PasswordField.jsx';
-import styles from '@/components/AuthCard.module.css';
+import TextField from '@/components/TextField.jsx';
+import { MailIcon } from '@/components/AuthIcons.jsx';
+import styles from '@/components/AuthForm.module.css';
 import { isEmailValid, MIN_SENHA, redefinirSenhaOng } from '@/services/authService.js';
 
 export default function ForgotPasswordPage() {
@@ -45,7 +47,9 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <AuthCard title="Redefinir senha">
+    <AuthLayout>
+      <h1 className={styles.title}>Redefinir senha</h1>
+      <p className={styles.subtitle}>Informe o e-mail da ONG e a nova senha</p>
       {success ? (
         <>
           <p className={styles.success} role="status">
@@ -60,18 +64,17 @@ export default function ForgotPasswordPage() {
       ) : (
         <>
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
-            <div className={styles.field}>
-              <label htmlFor="email">E-mail</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                autoComplete="email"
-                placeholder="E-mail"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
+            <TextField
+              id="email"
+              label="E-mail"
+              type="email"
+              name="email"
+              autoComplete="email"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              icon={<MailIcon />}
+            />
             <PasswordField
               id="senha"
               label="Nova senha"
@@ -104,6 +107,6 @@ export default function ForgotPasswordPage() {
           </p>
         </>
       )}
-    </AuthCard>
+    </AuthLayout>
   );
 }

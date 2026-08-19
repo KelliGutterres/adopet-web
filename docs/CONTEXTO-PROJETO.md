@@ -153,7 +153,8 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Listagem de animais no painel (adoção, encontrados, perdidos) — RF0004 / RF0010 parcial (spec 003)
 - [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
-- [ ] Telas de protótipo: login web; cadastro de animal; edição/gerenciamento
+- [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
+- [ ] Telas de protótipo: cadastro de animal; edição/gerenciamento
 
 ### Backend (Node.js)
 - [ ] API REST centralizando regras de negócio
@@ -390,6 +391,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-17 | Web: Vite + React + JS; CSS Modules; `fetch`; rota do painel `/painel` | Spec 001 / autora |
 | 2026-08-17 | Login web ONG: JWT em `localStorage`; `/auth/ongs/login`; esqueci senha | Spec 002 / autora |
 | 2026-08-19 | Painel web: listagem A/P/E (todos os tutores); só leitura; sem gênero/data; login verde permanece | Spec 003 / autora |
+| 2026-08-19 | Login web no layout do print (`login-web.png`); paleta roxa; sem Google/Apple; Cadastre-se visível e inativo | Spec 004 / autora |
 
 ---
 
@@ -407,6 +409,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Scaffold do painel web (Vite + React — spec 001)
 - [x] Login da ONG no painel web (spec 002)
 - [x] Listagem de animais no painel web (spec 003)
+- [x] Layout do login web conforme o print (spec 004; sem OAuth)
 - [ ] CRUD de animais (painel Web)
 
 ---
@@ -425,3 +428,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-17 | Scaffold web (spec 001): Vite + React JS, pastas, `fetch`, CSS Modules |
 | 2026-08-17 | Login ONG no web (spec 002): JWT, `/painel` placeholder, esqueci senha |
 | 2026-08-19 | Listagem de animais no painel (spec 003): sidebar, tabela A/P/E, GET `/animais?status=` |
+| 2026-08-19 | Layout do login web (spec 004): split marca + formulário, protótipo `login-web.png` |

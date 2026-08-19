@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthCard from '@/components/AuthCard.jsx';
+import AuthLayout from '@/components/AuthLayout.jsx';
 import PasswordField from '@/components/PasswordField.jsx';
-import styles from '@/components/AuthCard.module.css';
+import TextField from '@/components/TextField.jsx';
+import { LogInIcon, MailIcon } from '@/components/AuthIcons.jsx';
+import styles from '@/components/AuthForm.module.css';
 import { useAuth } from '@/hooks/useAuth.js';
 import { isEmailValid, MIN_SENHA } from '@/services/authService.js';
 
@@ -39,20 +41,21 @@ export default function LoginPage() {
   }
 
   return (
-    <AuthCard title="Entrar no painel" subtitle="Área exclusiva para ONGs">
+    <AuthLayout>
+      <h1 className={styles.title}>Bem-vindo de volta!</h1>
+      <p className={styles.subtitle}>Faça login para acessar sua conta</p>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <div className={styles.field}>
-          <label htmlFor="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </div>
+        <TextField
+          id="email"
+          label="E-mail"
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="Digite seu e-mail"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          icon={<MailIcon />}
+        />
         <PasswordField
           id="senha"
           label="Senha"
@@ -60,20 +63,25 @@ export default function LoginPage() {
           onChange={(event) => setSenha(event.target.value)}
           autoComplete="current-password"
         />
+        <p className={styles.forgotRow}>
+          <Link className={styles.link} to="/esqueci-senha">
+            Esqueceu sua senha?
+          </Link>
+        </p>
         {error ? (
           <p className={styles.alert} role="alert">
             {error}
           </p>
         ) : null}
         <button className={styles.submit} type="submit" disabled={submitting}>
-          {submitting ? 'Entrando…' : 'Entrar'}
+          {submitting ? 'Entrando…' : (
+            <>
+              Entrar
+              <LogInIcon />
+            </>
+          )}
         </button>
       </form>
-      <p className={styles.footer}>
-        <Link className={styles.link} to="/esqueci-senha">
-          Esqueci minha senha
-        </Link>
-      </p>
-    </AuthCard>
+    </AuthLayout>
   );
 }

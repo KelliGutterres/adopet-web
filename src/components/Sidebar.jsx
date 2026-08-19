@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.js';
+import PawLogo from './PawLogo.jsx';
 import styles from './Sidebar.module.css';
 
 const HOME = '/painel/animais/adocao';
@@ -103,17 +104,6 @@ function Icon({ name }) {
   }
 }
 
-function PawLogo() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" className={styles.logoIcon}>
-      <path
-        fill="currentColor"
-        d="M7.2 8.4c-.9.2-1.6 1.1-1.5 2.1.2 1.2 1.3 1.8 2.3 1.5 1-.2 1.6-1.3 1.4-2.4-.2-1-1.2-1.5-2.2-1.2zm4.3-3.2c-1 .2-1.6 1.2-1.4 2.3.2 1.1 1.3 1.7 2.3 1.4 1-.2 1.6-1.3 1.4-2.4-.2-1-1.3-1.5-2.3-1.3zm5.3 2.1c-1 .3-1.5 1.4-1.2 2.4.3 1 1.4 1.5 2.4 1.2 1-.3 1.5-1.4 1.2-2.4-.3-1-1.4-1.5-2.4-1.2zM6.8 13.2c-1.2.6-1.7 2-1.1 3.2.7 1.4 2.4 1.8 3.6 1 1.1-.7 1.4-2.3.7-3.5-.7-1.2-2.1-1.4-3.2-.7zm10.4 0c-1.1-.7-2.5-.5-3.2.7-.7 1.2-.4 2.8.7 3.5 1.2.8 2.9.4 3.6-1 .6-1.2.1-2.6-1.1-3.2zM12 13.4c-2.1 0-4 1.6-4 3.6 0 1.8 1.5 3 4 3s4-1.2 4-3c0-2-1.9-3.6-4-3.6z"
-      />
-    </svg>
-  );
-}
-
 export default function Sidebar({ open, onNavigate }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -126,7 +116,7 @@ export default function Sidebar({ open, onNavigate }) {
   return (
     <aside className={`${styles.sidebar} ${open ? styles.open : ''}`}>
       <NavLink className={styles.brand} to={HOME} onClick={onNavigate}>
-        <PawLogo />
+        <PawLogo className={styles.logoIcon} />
         <span>AdoPet</span>
       </NavLink>
 
