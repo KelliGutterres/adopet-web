@@ -1,5 +1,6 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.js';
+import { listItemIdFromLocation } from '@/pages/animaisListConfig.js';
 import PawLogo from './PawLogo.jsx';
 import styles from './Sidebar.module.css';
 
@@ -107,6 +108,8 @@ function Icon({ name }) {
 export default function Sidebar({ open, onNavigate }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const activeId = listItemIdFromLocation(location.pathname, location.search);
 
   function handleLogout() {
     logout();
@@ -137,7 +140,8 @@ export default function Sidebar({ open, onNavigate }) {
               key={item.id}
               to={item.to}
               end
-              className={({ isActive }) => `${styles.item} ${isActive ? styles.active : ''}`}
+              className={`${styles.item} ${activeId === item.id ? styles.active : ''}`}
+              aria-current={activeId === item.id ? 'page' : undefined}
               onClick={onNavigate}
             >
               <Icon name={item.id} />

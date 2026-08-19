@@ -151,12 +151,13 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Scaffold Vite + React (spec 001)
 - [x] Autenticação da ONG (e-mail/senha) — RF0009 (spec 002)
 - [x] Listagem de animais no painel (adoção, encontrados, perdidos) — RF0004 / RF0010 parcial (spec 003)
-- [ ] CRUD de animais para adoção (cadastro, edição, exclusão) — RF0003 / protótipos Fig. 16–17
+- [x] CRUD de animais no painel (A/P/E; ONG admin edita qualquer um) — RF0003 / RF0010 (spec 007)
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
-- [ ] Telas de protótipo: cadastro de animal; edição/gerenciamento
+- [x] Protótipo web de cadastro de animal (`docs/prototipos/cadastro-animal-adocao.png`)
+- [x] Tela de edição/gerenciamento (mesmo form da spec 007; sem print Fig. 17)
 
 ### Backend (Node.js)
 - [ ] API REST centralizando regras de negócio
@@ -396,6 +397,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Login web no layout do print (`login-web.png`); paleta roxa; sem Google/Apple | Spec 004 / autora |
 | 2026-08-19 | Cadastro ONG no web: `/cadastro`, mesmo layout do login; login automático; UF texto | Spec 005 / autora |
 | 2026-08-19 | Esqueci senha web: um form, prefill do e-mail, ícone, redirect imediato ao login | Spec 006 / autora |
+| 2026-08-19 | CRUD web de animais: 3 listas; ONG edita qualquer um (API spec 008); form do print de cadastro; sem foto | Spec 007 / autora |
 
 ---
 
@@ -409,14 +411,14 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] SDD + pasta `specs/` em cada repositório
 - [ ] Padronizar envelope de resposta da API e códigos de erro
 - [ ] Anexar protótipos/diagramas em `docs/` (opcional)
-- [x] Protótipos web de login e listagem em `docs/prototipos/` (spec 003)
+- [x] Protótipos web de login, listagem e cadastro de animal em `docs/prototipos/`
 - [x] Scaffold do painel web (Vite + React — spec 001)
 - [x] Login da ONG no painel web (spec 002)
 - [x] Listagem de animais no painel web (spec 003)
 - [x] Layout do login web conforme o print (spec 004; sem OAuth)
 - [x] Cadastro de ONG no web (spec 005)
 - [x] Esqueci a senha da ONG no web (spec 006)
-- [ ] CRUD de animais (painel Web)
+- [x] CRUD de animais no painel (spec 007)
 
 ---
 
@@ -437,3 +439,5 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Layout do login web (spec 004): split marca + formulário, protótipo `login-web.png` |
 | 2026-08-19 | Cadastro ONG no web (spec 005): `/cadastro`, mesmo layout, login automático, UF texto |
 | 2026-08-19 | Esqueci senha ONG no web (spec 006): um form, prefill `?email=`, redirect imediato |
+| 2026-08-19 | Spec 007 CRUD animais (em revisão): print cadastro anexado; ONG admin; 3 listas |
+| 2026-08-19 | Spec 007 implementada: cadastro/edição/exclusão no painel; form do print; spec 008 no backend |

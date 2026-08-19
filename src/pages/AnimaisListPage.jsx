@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import AnimalTable from '@/components/AnimalTable.jsx';
+import ConfirmDialog from '@/components/ConfirmDialog.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
-import { listarAnimais } from '@/services/animaisService.js';
+import { excluirAnimal, listarAnimais } from '@/services/animaisService.js';
 import { animalMatchesFilters } from '@/services/animalLabels.js';
 import { screenFromSituacao } from './animaisListConfig.js';
 import styles from './AnimaisListPage.module.css';
@@ -19,11 +20,15 @@ export default function AnimaisListPage() {
   const [busca, setBusca] = useState('');
   const [especie, setEspecie] = useState('');
   const [porte, setPorte] = useState('');
+  const [reloadToken, setReloadToken] = useState(0);
+  const [toDelete, setToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     setBusca('');
     setEspecie('');
     setPorte('');
+    setToDelete(null);
   }, [situacao]);
 
   useEffect(() => {
@@ -64,12 +69,42 @@ export default function AnimaisListPage() {
     return () => {
       cancelled = true;
     };
-  }, [situacao, logout, navigate]);
+  }, [situacao, logout, navigate, reloadToken]);
 
   const filtrados = useMemo(
     () => animais.filter((animal) => animalMatchesFilters(animal, { busca, especie, porte })),
     [animais, busca, especie, porte],
   );
+
+  const closeDelete = useCallback(() => {
+    if (!deleting) {
+      setToDelete(null);
+    }
+  }, [deleting]);
+
+  async function handleConfirmDelete() {
+    if (!toDelete) {
+      return;
+    }
+
+    setDeleting(true);
+    setError('');
+    try {
+      await excluirAnimal(toDelete.idAnimal);
+      setToDelete(null);
+      setReloadToken((token) => token + 1);
+    } catch (err) {
+      if (err.status === 401) {
+        logout();
+        navigate('/login', { replace: true });
+        return;
+      }
+      setError(err.message || 'Erro na requisição');
+      setToDelete(null);
+    } finally {
+      setDeleting(false);
+    }
+  }
 
   if (!screen) {
     return <Navigate to="/painel/animais/adocao" replace />;
@@ -122,7 +157,11 @@ export default function AnimaisListPage() {
           </select>
         </label>
 
-        <button className={styles.cadastrar} type="button" disabled title="Em breve">
+        <button
+          className={styles.cadastrar}
+          type="button"
+          onClick={() => navigate(`/painel/animais/novo?status=${screen.status}`)}
+        >
           + Cadastrar novo animal
         </button>
       </div>
@@ -143,7 +182,27 @@ export default function AnimaisListPage() {
         <p className={styles.status}>{emptyMessage}</p>
       ) : null}
 
-      {!loading && !error && filtrados.length > 0 ? <AnimalTable animais={filtrados} /> : null}
+      {!loading && filtrados.length > 0 ? (
+        <AnimalTable
+          animais={filtrados}
+          onEdit={(animal) =>
+            navigate(`/painel/animais/${animal.idAnimal}/editar?status=${screen.status}`)
+          }
+          onDelete={setToDelete}
+        />
+      ) : null}
+
+      <ConfirmDialog
+        open={Boolean(toDelete)}
+        title="Excluir animal"
+        confirmLabel="Excluir"
+        danger
+        loading={deleting}
+        onCancel={closeDelete}
+        onConfirm={handleConfirmDelete}
+      >
+        Excluir <strong>{toDelete?.nome}</strong>? Esta ação não pode ser desfeita.
+      </ConfirmDialog>
     </section>
   );
 }

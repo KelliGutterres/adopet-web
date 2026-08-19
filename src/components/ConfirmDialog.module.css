@@ -1,0 +1,84 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(17, 24, 39, 0.45);
+  cursor: pointer;
+}
+
+.dialog {
+  position: relative;
+  width: min(440px, 100%);
+  background: var(--painel-surface);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(17, 24, 39, 0.18);
+  padding: 1.35rem 1.4rem 1.2rem;
+}
+
+.dialog h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.body {
+  margin: 0.7rem 0 1.2rem;
+  color: var(--painel-muted);
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.cancel,
+.confirm,
+.confirmDanger {
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+}
+
+.cancel:focus-visible,
+.confirm:focus-visible,
+.confirmDanger:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+}
+
+.cancel {
+  border: 1px solid var(--painel-border);
+  background: #fff;
+  color: var(--painel-text);
+}
+
+.confirm {
+  border: none;
+  background: var(--painel-primary);
+  color: #fff;
+}
+
+.confirmDanger {
+  border: none;
+  background: var(--painel-danger);
+  color: #fff;
+}
+
+.cancel:disabled,
+.confirm:disabled,
+.confirmDanger:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

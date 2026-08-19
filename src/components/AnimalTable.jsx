@@ -20,7 +20,7 @@ function TrashIcon() {
   );
 }
 
-export default function AnimalTable({ animais }) {
+export default function AnimalTable({ animais, onEdit, onDelete }) {
   return (
     <div className={styles.wrap}>
       <table className={styles.table}>
@@ -55,11 +55,11 @@ export default function AnimalTable({ animais }) {
               <td>{labelPorte(animal.porte)}</td>
               <td>
                 <div className={styles.actions}>
-                  <button type="button" className={styles.edit} disabled title="Em breve">
+                  <button type="button" className={styles.edit} onClick={() => onEdit(animal)}>
                     <PencilIcon />
                     Editar
                   </button>
-                  <button type="button" className={styles.remove} disabled title="Em breve">
+                  <button type="button" className={styles.remove} onClick={() => onDelete(animal)}>
                     <TrashIcon />
                     Excluir
                   </button>
