@@ -155,6 +155,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
+- [x] Esqueci a senha da ONG no painel web (spec 006)
 - [ ] Telas de protótipo: cadastro de animal; edição/gerenciamento
 
 ### Backend (Node.js)
@@ -394,6 +395,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Painel web: listagem A/P/E (todos os tutores); só leitura; sem gênero/data; login verde permanece | Spec 003 / autora |
 | 2026-08-19 | Login web no layout do print (`login-web.png`); paleta roxa; sem Google/Apple | Spec 004 / autora |
 | 2026-08-19 | Cadastro ONG no web: `/cadastro`, mesmo layout do login; login automático; UF texto | Spec 005 / autora |
+| 2026-08-19 | Esqueci senha web: um form, prefill do e-mail, ícone, redirect imediato ao login | Spec 006 / autora |
 
 ---
 
@@ -413,6 +415,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Listagem de animais no painel web (spec 003)
 - [x] Layout do login web conforme o print (spec 004; sem OAuth)
 - [x] Cadastro de ONG no web (spec 005)
+- [x] Esqueci a senha da ONG no web (spec 006)
 - [ ] CRUD de animais (painel Web)
 
 ---
@@ -433,3 +436,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Listagem de animais no painel (spec 003): sidebar, tabela A/P/E, GET `/animais?status=` |
 | 2026-08-19 | Layout do login web (spec 004): split marca + formulário, protótipo `login-web.png` |
 | 2026-08-19 | Cadastro ONG no web (spec 005): `/cadastro`, mesmo layout, login automático, UF texto |
+| 2026-08-19 | Esqueci senha ONG no web (spec 006): um form, prefill `?email=`, redirect imediato |

@@ -47,7 +47,14 @@ export default function App() {
             </PublicOnlyRoute>
           }
         />
-        <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
+        <Route
+          path="/esqueci-senha"
+          element={
+            <PublicOnlyRoute>
+              <ForgotPasswordPage />
+            </PublicOnlyRoute>
+          }
+        />
         <Route
           path="/painel"
           element={

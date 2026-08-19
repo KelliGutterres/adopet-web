@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import AuthLayout from '@/components/AuthLayout.jsx';
 import PasswordField from '@/components/PasswordField.jsx';
 import TextField from '@/components/TextField.jsx';
@@ -8,12 +8,28 @@ import styles from '@/components/AuthForm.module.css';
 import { useAuth } from '@/hooks/useAuth.js';
 import { isEmailValid, MIN_SENHA } from '@/services/authService.js';
 
+function initialEmail(location, searchParams) {
+  const fromState = typeof location.state?.email === 'string' ? location.state.email.trim() : '';
+  if (fromState) return fromState;
+  return String(searchParams.get('email') || '').trim();
+}
+
+function forgotPasswordPath(email) {
+  const trimmed = email.trim();
+  return trimmed ? `/esqueci-senha?email=${encodeURIComponent(trimmed)}` : '/esqueci-senha';
+}
+
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const [email, setEmail] = useState(() => initialEmail(location, searchParams));
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
+  const [info] = useState(() => (
+    location.state?.senhaAtualizada ? 'Senha atualizada. Faça login com a nova senha.' : ''
+  ));
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(event) {
@@ -44,6 +60,11 @@ export default function LoginPage() {
     <AuthLayout>
       <h1 className={styles.title}>Bem-vindo de volta!</h1>
       <p className={styles.subtitle}>Faça login para acessar sua conta</p>
+      {info && !error ? (
+        <p className={styles.success} role="status">
+          {info}
+        </p>
+      ) : null}
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <TextField
           id="email"
@@ -64,7 +85,7 @@ export default function LoginPage() {
           autoComplete="current-password"
         />
         <p className={styles.forgotRow}>
-          <Link className={styles.link} to="/esqueci-senha">
+          <Link className={styles.link} to={forgotPasswordPath(email)}>
             Esqueceu sua senha?
           </Link>
         </p>
