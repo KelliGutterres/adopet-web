@@ -45,10 +45,6 @@ export default function AuthLayout({ children, variant = 'login' }) {
             </Link>
           </div>
           <div className={styles.formMain}>{children}</div>
-          <p className={styles.formFooter}>
-            <ShieldIcon />
-            Seus dados estão protegidos com segurança.
-          </p>
         </div>
       </section>
     </main>
