@@ -37,7 +37,7 @@ export default function LoginPage() {
     setError('');
 
     if (!isEmailValid(email)) {
-      setError('Informe um e-mail válido');
+      setError('Informe um e-mail válido!');
       return;
     }
     if (!senha || senha.length < MIN_SENHA) {

@@ -142,7 +142,7 @@ export default function AnimaisListPage() {
           <span className={styles.srOnly}>Espécie</span>
           <select value={especie} onChange={(event) => setEspecie(event.target.value)}>
             <option value="">Espécie: todas</option>
-            <option value="CAO">Cão</option>
+            <option value="CAO">Cachorro</option>
             <option value="GATO">Gato</option>
           </select>
         </label>
