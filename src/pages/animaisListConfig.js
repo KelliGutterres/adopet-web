@@ -58,6 +58,9 @@ export function pathFromStatus(status) {
 }
 
 export function listItemIdFromLocation(pathname, search) {
+  if (/\/painel\/usuarios\/?$/.test(pathname)) {
+    return 'usuarios';
+  }
   if (/\/painel\/ong\/?$/.test(pathname)) {
     return 'ong';
   }

@@ -7,6 +7,7 @@ import AnimalDetailPage from '@/pages/AnimalDetailPage.jsx';
 import AnimalFormPage from '@/pages/AnimalFormPage.jsx';
 import AnimaisListPage from '@/pages/AnimaisListPage.jsx';
 import OngProfilePage from '@/pages/OngProfilePage.jsx';
+import UsuariosListPage from '@/pages/UsuariosListPage.jsx';
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage.jsx';
 import LoginPage from '@/pages/LoginPage.jsx';
 import RegisterPage from '@/pages/RegisterPage.jsx';
@@ -67,6 +68,7 @@ export default function App() {
           }
         >
           <Route index element={<Navigate to="animais/adocao" replace />} />
+          <Route path="usuarios" element={<UsuariosListPage />} />
           <Route path="ong" element={<OngProfilePage />} />
           <Route path="animais/novo" element={<AnimalFormPage />} />
           <Route path="animais/:idAnimal/editar" element={<AnimalFormPage />} />

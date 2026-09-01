@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { id: 'adocao', label: 'Animais para Adoção', to: '/painel/animais/adocao' },
   { id: 'encontrados', label: 'Animais Encontrados', to: '/painel/animais/encontrados' },
   { id: 'perdidos', label: 'Animais Perdidos', to: '/painel/animais/perdidos' },
-  { id: 'usuarios', label: 'Usuários', disabled: true },
+  { id: 'usuarios', label: 'Usuários', to: '/painel/usuarios' },
   { id: 'ong', label: 'ONG / Instituição', to: '/painel/ong' },
   { id: 'relatorios', label: 'Relatórios', disabled: true },
   { id: 'config', label: 'Configurações', disabled: true },
