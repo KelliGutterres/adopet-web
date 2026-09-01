@@ -34,6 +34,37 @@ export function labelIdade(idade) {
   return n === 1 ? '1 ano' : `${n} anos`;
 }
 
+const STATUS_LABELS = {
+  A: 'Para adoção',
+  P: 'Perdido',
+  E: 'Encontrado',
+};
+
+export function labelStatus(status) {
+  return STATUS_LABELS[status] || '';
+}
+
+export function labelCidade(cidade) {
+  if (!cidade?.nome) {
+    return '—';
+  }
+  return cidade.uf ? `${cidade.nome} - ${cidade.uf}` : cidade.nome;
+}
+
+export function labelResponsavel(animal) {
+  if (animal?.status === 'A') {
+    return {
+      label: 'ONG responsável',
+      value: animal?.instituicao?.nome || animal?.usuario?.nome || '',
+    };
+  }
+
+  return {
+    label: 'Cadastrado por',
+    value: animal?.usuario?.nome || animal?.instituicao?.nome || '',
+  };
+}
+
 export function iniciaisNome(nome) {
   const trimmed = (nome || '').trim();
   if (!trimmed) {

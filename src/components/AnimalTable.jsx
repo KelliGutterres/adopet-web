@@ -20,7 +20,7 @@ function TrashIcon() {
   );
 }
 
-export default function AnimalTable({ animais, onEdit, onDelete }) {
+export default function AnimalTable({ animais, onOpen, onEdit, onDelete }) {
   return (
     <div className={styles.wrap}>
       <table className={styles.table}>
@@ -42,7 +42,14 @@ export default function AnimalTable({ animais, onEdit, onDelete }) {
                     {iniciaisNome(animal.nome)}
                   </span>
                   <span>
-                    <strong>{animal.nome}</strong>
+                    <button
+                      type="button"
+                      className={styles.nameLink}
+                      onClick={() => onOpen(animal)}
+                      aria-label={`Ver detalhes de ${animal.nome}`}
+                    >
+                      {animal.nome}
+                    </button>
                     <small>ID: #{animal.idAnimal}</small>
                   </span>
                 </div>

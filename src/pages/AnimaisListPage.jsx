@@ -185,6 +185,9 @@ export default function AnimaisListPage() {
       {!loading && filtrados.length > 0 ? (
         <AnimalTable
           animais={filtrados}
+          onOpen={(animal) =>
+            navigate(`/painel/animais/${animal.idAnimal}/detalhes?status=${screen.status}`)
+          }
           onEdit={(animal) =>
             navigate(`/painel/animais/${animal.idAnimal}/editar?status=${screen.status}`)
           }

@@ -113,7 +113,7 @@ adopet-web/
 └── vite.config.js
 ```
 
-> Login JWT, `/painel` e AuthContext: spec 002.
+> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009.
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
@@ -153,6 +153,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Listagem de animais no painel (adoção, encontrados, perdidos) — RF0004 / RF0010 parcial (spec 003)
 - [x] CRUD de animais no painel (A/P/E; ONG admin edita qualquer um) — RF0003 / RF0010 (spec 007)
 - [x] Edição dos dados da própria ONG no painel (`/painel/ong`) — RF0009 parcial (spec 008)
+- [x] Detalhe do animal no painel (A/P/E; `GET /animais/:id`) — RF0006 (spec 009)
 - [ ] Gerenciamento de usuários e registros de animais (casos de uso da ONG na Parte 1)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
@@ -337,7 +338,7 @@ Critério de pronto: [comportamento verificável]
 - Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
 - Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
-- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel` e `/painel/ong` (JWT ONG).
+- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel`, `/painel/ong` e `/painel/animais/:id/detalhes` (JWT ONG).
 - Sessão: JWT + dados da ONG em `localStorage`; `Authorization: Bearer` no `api.js`.
 
 ### Mobile (React Native)
@@ -400,6 +401,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Esqueci senha web: um form, prefill do e-mail, ícone, redirect imediato ao login | Spec 006 / autora |
 | 2026-08-19 | CRUD web de animais: 3 listas; ONG edita qualquer um (API spec 008); form do print de cadastro; sem foto | Spec 007 / autora |
 | 2026-08-31 | Web: edição da ONG em `/painel/ong` via sidebar; GET+PATCH `/ongs/me`; header só visual | Spec 008 / autora |
+| 2026-08-31 | Web: detalhe A/P/E em `/painel/animais/:id/detalhes`; nome clicável; GET por id; sem Editar/Excluir na página | Spec 009 / autora |
 
 ---
 
@@ -422,6 +424,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Esqueci a senha da ONG no web (spec 006)
 - [x] CRUD de animais no painel (spec 007)
 - [x] Edição de perfil da ONG no painel (spec 008)
+- [x] Detalhe do animal no painel (spec 009)
 
 ---
 
@@ -445,3 +448,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-19 | Spec 007 CRUD animais (em revisão): print cadastro anexado; ONG admin; 3 listas |
 | 2026-08-19 | Spec 007 implementada: cadastro/edição/exclusão no painel; form do print; spec 008 no backend |
 | 2026-08-31 | Spec 008 web: edição da instituição em `/painel/ong` (sidebar); GET/PATCH `/ongs/me` |
+| 2026-08-31 | Spec 009 web: detalhe A/P/E (`/painel/animais/:id/detalhes`); nome clicável; GET `/animais/:id`; sem Editar no detalhe |

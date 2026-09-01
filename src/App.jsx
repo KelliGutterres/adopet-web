@@ -3,6 +3,7 @@ import ProtectedRoute from '@/components/ProtectedRoute.jsx';
 import PublicOnlyRoute from '@/components/PublicOnlyRoute.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
 import PainelLayout from '@/layouts/PainelLayout.jsx';
+import AnimalDetailPage from '@/pages/AnimalDetailPage.jsx';
 import AnimalFormPage from '@/pages/AnimalFormPage.jsx';
 import AnimaisListPage from '@/pages/AnimaisListPage.jsx';
 import OngProfilePage from '@/pages/OngProfilePage.jsx';
@@ -69,6 +70,7 @@ export default function App() {
           <Route path="ong" element={<OngProfilePage />} />
           <Route path="animais/novo" element={<AnimalFormPage />} />
           <Route path="animais/:idAnimal/editar" element={<AnimalFormPage />} />
+          <Route path="animais/:idAnimal/detalhes" element={<AnimalDetailPage />} />
           <Route path="animais/:situacao" element={<AnimaisListPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
