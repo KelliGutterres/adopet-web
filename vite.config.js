@@ -9,6 +9,7 @@ const API_TARGET = 'http://127.0.0.1:3000';
 const apiProxy = {
   '/auth': { target: API_TARGET, changeOrigin: true },
   '/animais': { target: API_TARGET, changeOrigin: true },
+  '/ongs': { target: API_TARGET, changeOrigin: true },
   '/health': { target: API_TARGET, changeOrigin: true },
 };
 

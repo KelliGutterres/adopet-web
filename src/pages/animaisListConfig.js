@@ -58,6 +58,9 @@ export function pathFromStatus(status) {
 }
 
 export function listItemIdFromLocation(pathname, search) {
+  if (/\/painel\/ong\/?$/.test(pathname)) {
+    return 'ong';
+  }
   if (pathname.includes('/animais/novo') || /\/animais\/\d+\/editar\/?$/.test(pathname)) {
     const status = new URLSearchParams(search).get('status');
     return situacaoFromStatus(status);

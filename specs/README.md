@@ -22,3 +22,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | [005](./005-cadastro-ong.md) | Cadastro da ONG no painel (mesmo layout do login) | aprovada e implementada |
 | [006](./006-esqueci-senha-ong.md) | Esqueci a senha da ONG (refino da tela) | aprovada e implementada |
 | [007](./007-crud-animais.md) | CRUD de animais no painel (cadastro, edição, exclusão) | aprovada e implementada |
+| [008](./008-edicao-perfil-ong.md) | Edição de perfil da ONG (dados da instituição) | aprovada e implementada |

@@ -1,9 +1,10 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { cadastrarOng, me as fetchMe, loginOng } from '@/services/authService.js';
 import {
   clearSession,
   readStoredOng,
   readStoredToken,
+  saveOng,
   saveSession,
 } from '@/services/session.js';
 
@@ -70,6 +71,17 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
+  const atualizarOng = useCallback((ongDaApi) => {
+    saveOng(ongDaApi);
+    setOng(ongDaApi);
+  }, []);
+
+  const logout = useCallback(() => {
+    clearSession();
+    setToken(null);
+    setOng(null);
+  }, []);
+
   const value = useMemo(
     () => ({
       ong,
@@ -88,13 +100,10 @@ export function AuthProvider({ children }) {
         setToken(result.token);
         setOng(result.ong);
       },
-      logout() {
-        clearSession();
-        setToken(null);
-        setOng(null);
-      },
+      logout,
+      atualizarOng,
     }),
-    [ong, token, ready],
+    [ong, token, ready, logout, atualizarOng],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

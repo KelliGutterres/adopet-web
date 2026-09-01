@@ -18,6 +18,10 @@ export function saveSession(token, ong) {
   localStorage.setItem(ONG_KEY, JSON.stringify(ong));
 }
 
+export function saveOng(ong) {
+  localStorage.setItem(ONG_KEY, JSON.stringify(ong));
+}
+
 export function clearSession() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(ONG_KEY);
