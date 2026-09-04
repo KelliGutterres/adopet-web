@@ -57,6 +57,9 @@ export function pathFromStatus(status) {
   return `/painel/animais/${situacaoFromStatus(status)}`;
 }
 
+export const PHOTO_UPLOAD_FAILED_NOTICE =
+  'Animal salvo, mas a foto não foi enviada. Você pode adicioná-la ao editar.';
+
 export function listItemIdFromLocation(pathname, search) {
   if (/\/painel\/usuarios\/?$/.test(pathname)) {
     return 'usuarios';

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import AnimalTable from '@/components/AnimalTable.jsx';
 import ConfirmDialog from '@/components/ConfirmDialog.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
@@ -12,11 +12,13 @@ export default function AnimaisListPage() {
   const { situacao } = useParams();
   const screen = screenFromSituacao(situacao);
   const navigate = useNavigate();
+  const location = useLocation();
   const { logout } = useAuth();
 
   const [animais, setAnimais] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
   const [busca, setBusca] = useState('');
   const [especie, setEspecie] = useState('');
   const [porte, setPorte] = useState('');
@@ -29,7 +31,17 @@ export default function AnimaisListPage() {
     setEspecie('');
     setPorte('');
     setToDelete(null);
+    setNotice('');
   }, [situacao]);
+
+  useEffect(() => {
+    const nextNotice = location.state?.notice;
+    if (!nextNotice) {
+      return;
+    }
+    setNotice(nextNotice);
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [location.pathname, location.state, navigate]);
 
   useEffect(() => {
     const current = screenFromSituacao(situacao);
@@ -165,6 +177,12 @@ export default function AnimaisListPage() {
           + Cadastrar novo animal
         </button>
       </div>
+
+      {notice ? (
+        <p className={styles.notice} role="status">
+          {notice}
+        </p>
+      ) : null}
 
       {error ? (
         <p className={styles.alert} role="alert">

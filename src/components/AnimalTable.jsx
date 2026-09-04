@@ -1,4 +1,5 @@
-import { iniciaisNome, labelEspecie, labelIdade, labelPorte } from '@/services/animalLabels.js';
+import AnimalPhoto from '@/components/AnimalPhoto.jsx';
+import { labelEspecie, labelIdade, labelPorte } from '@/services/animalLabels.js';
 import styles from './AnimalTable.module.css';
 
 function PencilIcon() {
@@ -38,9 +39,7 @@ export default function AnimalTable({ animais, onOpen, onEdit, onDelete }) {
             <tr key={animal.idAnimal}>
               <td>
                 <div className={styles.animal}>
-                  <span className={styles.photo} aria-hidden="true">
-                    {iniciaisNome(animal.nome)}
-                  </span>
+                  <AnimalPhoto src={animal.urlImagem} nome={animal.nome} variant="table" alt="" />
                   <span>
                     <button
                       type="button"

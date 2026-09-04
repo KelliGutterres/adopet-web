@@ -1,16 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import PhotoDropzone from '@/components/PhotoDropzone.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
 import { isUfValid } from '@/services/authService.js';
 import {
   atualizarAnimal,
   buscarAnimalPorId,
   criarAnimal,
+  enviarImagem,
+  removerImagem,
 } from '@/services/animaisService.js';
 import {
   FORM_COPY,
   normalizeStatus,
   pathFromStatus,
+  PHOTO_UPLOAD_FAILED_NOTICE,
 } from './animaisListConfig.js';
 import styles from './AnimalFormPage.module.css';
 
@@ -114,6 +118,11 @@ export default function AnimalFormPage() {
 
   const [form, setForm] = useState(() => emptyForm(ong));
   const [animalNome, setAnimalNome] = useState('');
+  const [localFile, setLocalFile] = useState(null);
+  const [remoteUrl, setRemoteUrl] = useState(null);
+  const [removed, setRemoved] = useState(false);
+  const [localPreview, setLocalPreview] = useState('');
+  const [photoBusy, setPhotoBusy] = useState(false);
   const [loading, setLoading] = useState(isEdit);
   const [loaded, setLoaded] = useState(!isEdit);
   const [submitting, setSubmitting] = useState(false);
@@ -123,6 +132,20 @@ export default function AnimalFormPage() {
     () => Array.from({ length: IDADE_MAX + 1 }, (_, idade) => idade),
     [],
   );
+
+  useEffect(() => {
+    if (!localFile) {
+      setLocalPreview('');
+      return undefined;
+    }
+    const url = URL.createObjectURL(localFile);
+    setLocalPreview(url);
+    return () => {
+      URL.revokeObjectURL(url);
+    };
+  }, [localFile]);
+
+  const previewUrl = localPreview || (!removed && remoteUrl) || '';
 
   useEffect(() => {
     if (!isEdit) {
@@ -154,6 +177,9 @@ export default function AnimalFormPage() {
         }
         setForm(formFromAnimal(animal));
         setAnimalNome(animal.nome || '');
+        setRemoteUrl(animal.urlImagem || null);
+        setLocalFile(null);
+        setRemoved(false);
         setLoaded(true);
         const nextStatus = normalizeStatus(animal.status);
         const currentStatus = new URLSearchParams(window.location.search).get('status');
@@ -198,11 +224,28 @@ export default function AnimalFormPage() {
     navigate(pathFromStatus(status));
   }
 
+  function handlePhotoFile(file) {
+    setError('');
+    setLocalFile(file);
+    setRemoved(false);
+  }
+
+  function handlePhotoRemove() {
+    setError('');
+    setLocalFile(null);
+    setRemoved(true);
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const localError = validate(form);
     if (localError) {
       setError(localError);
+      return;
+    }
+
+    if (!isEdit && !localFile) {
+      setError('Adicione uma foto');
       return;
     }
 
@@ -212,10 +255,35 @@ export default function AnimalFormPage() {
     try {
       if (isEdit) {
         await atualizarAnimal(idAnimal, buildBody(form));
-      } else {
-        await criarAnimal(buildBody(form, { status }));
+        if (localFile) {
+          await enviarImagem(idAnimal, localFile);
+        } else if (removed && remoteUrl) {
+          await removerImagem(idAnimal);
+        }
+        navigate(pathFromStatus(status), { replace: true });
+        return;
       }
-      navigate(pathFromStatus(status), { replace: true });
+
+      const animal = await criarAnimal(buildBody(form, { status }));
+      if (!animal?.idAnimal) {
+        setError('Não foi possível salvar');
+        return;
+      }
+
+      try {
+        await enviarImagem(animal.idAnimal, localFile);
+        navigate(pathFromStatus(status), { replace: true });
+      } catch (imgErr) {
+        if (imgErr.status === 401) {
+          logout();
+          navigate('/login', { replace: true });
+          return;
+        }
+        navigate(pathFromStatus(status), {
+          replace: true,
+          state: { notice: PHOTO_UPLOAD_FAILED_NOTICE },
+        });
+      }
     } catch (err) {
       if (err.status === 401) {
         logout();
@@ -231,6 +299,10 @@ export default function AnimalFormPage() {
   const subtitle = isEdit
     ? `Atualize os dados de ${animalNome || 'animal'}.`
     : copy.subtitle;
+
+  const photoHint = isEdit
+    ? 'Uma foto (JPEG, PNG ou WebP). Máximo 8 MB. A nova substitui a anterior. Pode remover.'
+    : 'Obrigatória. Uma foto (JPEG, PNG ou WebP). Máximo 8 MB. A nova substitui a anterior.';
 
   return (
     <div className={styles.page}>
@@ -354,45 +426,61 @@ export default function AnimalFormPage() {
               </div>
             </section>
 
-            <section className={styles.card}>
-              <h2>Localização</h2>
-              <div className={styles.fields}>
-                <label htmlFor="cidade">
-                  Cidade <span aria-hidden="true">*</span>
-                  <input
-                    id="cidade"
-                    name="cidade"
-                    maxLength={60}
-                    placeholder="Ex: Lajeado"
-                    value={form.cidade}
-                    onChange={updateField('cidade')}
-                    required
-                    aria-required="true"
-                  />
-                </label>
-                <label htmlFor="uf">
-                  UF <span aria-hidden="true">*</span>
-                  <input
-                    id="uf"
-                    name="uf"
-                    maxLength={2}
-                    placeholder="Ex: RS"
-                    value={form.uf}
-                    onChange={updateField('uf')}
-                    required
-                    aria-required="true"
-                    autoComplete="address-level1"
-                  />
-                </label>
-              </div>
-            </section>
+            <div className={styles.aside}>
+              <section className={styles.card}>
+                <h2>Fotos do animal</h2>
+                <p className={styles.photoHint}>{photoHint}</p>
+                <PhotoDropzone
+                  previewUrl={previewUrl}
+                  disabled={submitting}
+                  onFile={handlePhotoFile}
+                  onRemove={handlePhotoRemove}
+                  onError={setError}
+                  onPreparing={setPhotoBusy}
+                  showRemove={Boolean(previewUrl)}
+                />
+              </section>
+
+              <section className={styles.card}>
+                <h2>Localização</h2>
+                <div className={styles.fields}>
+                  <label htmlFor="cidade">
+                    Cidade <span aria-hidden="true">*</span>
+                    <input
+                      id="cidade"
+                      name="cidade"
+                      maxLength={60}
+                      placeholder="Ex: Lajeado"
+                      value={form.cidade}
+                      onChange={updateField('cidade')}
+                      required
+                      aria-required="true"
+                    />
+                  </label>
+                  <label htmlFor="uf">
+                    UF <span aria-hidden="true">*</span>
+                    <input
+                      id="uf"
+                      name="uf"
+                      maxLength={2}
+                      placeholder="Ex: RS"
+                      value={form.uf}
+                      onChange={updateField('uf')}
+                      required
+                      aria-required="true"
+                      autoComplete="address-level1"
+                    />
+                  </label>
+                </div>
+              </section>
+            </div>
           </div>
 
           <div className={styles.footer}>
-            <button className={styles.cancel} type="button" onClick={goBack} disabled={submitting}>
+            <button className={styles.cancel} type="button" onClick={goBack} disabled={submitting || photoBusy}>
               Cancelar
             </button>
-            <button className={styles.submit} type="submit" disabled={submitting}>
+            <button className={styles.submit} type="submit" disabled={submitting || photoBusy}>
               {submitting ? 'Salvando…' : 'Salvar animal'}
             </button>
           </div>

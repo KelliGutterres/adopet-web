@@ -1,0 +1,130 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: relative;
+}
+
+.dropzone {
+  min-height: 160px;
+  border: 1.5px dashed var(--painel-primary);
+  border-radius: 12px;
+  background: var(--painel-primary-soft);
+  color: var(--painel-primary);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+}
+
+.dropzone:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+}
+
+.dragging {
+  border-style: solid;
+  box-shadow: inset 0 0 0 2px var(--painel-primary);
+}
+
+.hasPreview {
+  padding: 0;
+  background: #f3f4f6;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.placeholder p {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  max-width: 16rem;
+  line-height: 1.35;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.secondary,
+.remove {
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  background: #fff;
+}
+
+.secondary {
+  border: 1px solid var(--painel-primary);
+  color: var(--painel-primary);
+}
+
+.remove {
+  border: 1px solid var(--painel-danger);
+  color: var(--painel-danger);
+}
+
+.secondary:hover:not(:disabled),
+.remove:hover:not(:disabled) {
+  background: var(--painel-primary-soft);
+}
+
+.remove:hover:not(:disabled) {
+  background: var(--painel-danger-soft);
+}
+
+.secondary:disabled,
+.remove:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.secondary:focus-visible,
+.remove:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .secondary,
+  .remove {
+    width: 100%;
+  }
+}

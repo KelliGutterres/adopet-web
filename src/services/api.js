@@ -45,9 +45,7 @@ export async function request(path, options = {}) {
   return response;
 }
 
-export async function requestJson(path, options = {}) {
-  const response = await request(path, options);
-
+async function parseJsonResponse(response) {
   if (response.status === 204) {
     return null;
   }
@@ -68,4 +66,31 @@ export async function requestJson(path, options = {}) {
   }
 
   return data;
+}
+
+export async function requestJson(path, options = {}) {
+  const response = await request(path, options);
+  return parseJsonResponse(response);
+}
+
+export async function requestForm(path, formData, options = {}) {
+  const { method = 'POST', headers = {}, ...rest } = options;
+  const token = readToken();
+
+  let response;
+  try {
+    response = await fetch(apiUrl(path), {
+      method,
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...headers,
+      },
+      body: formData,
+      ...rest,
+    });
+  } catch {
+    throw new ApiError(NETWORK_ERROR_MESSAGE);
+  }
+
+  return parseJsonResponse(response);
 }

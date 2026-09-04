@@ -31,19 +31,6 @@
   gap: 1rem;
 }
 
-.photo {
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
-  background: var(--painel-primary-soft);
-  color: var(--painel-primary);
-  display: grid;
-  place-items: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
 .nome {
   margin: 0;
   font-size: 1.25rem;

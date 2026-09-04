@@ -113,7 +113,7 @@ adopet-web/
 └── vite.config.js
 ```
 
-> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010.
+> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010. Upload de foto no painel: spec 011.
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
@@ -143,7 +143,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Listagem: adoção, perdidos, localizados/encontrados — RF0004
 - [ ] Filtros: situação, espécie, porte, idade, localização, status — RF0005
 - [ ] Detalhes do animal (fotos, descrição, localização) — RF0006
-- [ ] Upload por galeria ou câmera — RF0007
+- [x] Upload por galeria ou câmera — RF0007 (mobile spec 012; web spec 011)
 - [ ] Comparação inteligente de imagens — RF0008
 - [ ] Telas de protótipo: autenticação/cadastro; listagem de animais
 
@@ -153,8 +153,9 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Listagem de animais no painel (adoção, encontrados, perdidos) — RF0004 / RF0010 parcial (spec 003)
 - [x] CRUD de animais no painel (A/P/E; ONG admin edita qualquer um) — RF0003 / RF0010 (spec 007)
 - [x] Edição dos dados da própria ONG no painel (`/painel/ong`) — RF0009 parcial (spec 008)
-- [x] Detalhe do animal no painel (A/P/E; `GET /animais/:id`) — RF0006 (spec 009)
+- [x] Detalhe do animal no painel (A/P/E; `GET /animais/:id`) — RF0006 (spec 009; foto real na spec 011)
 - [x] Gerenciamento de usuários no painel (listar / excluir) — RF0010 (spec 010)
+- [x] Upload/captura de imagem no painel (card Fotos; uma foto) — RF0007 (spec 011)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
@@ -344,7 +345,7 @@ Critério de pronto: [comportamento verificável]
 ### Mobile (React Native)
 - Organização por feature quando possível.
 - Loading, empty state e erro em listas.
-- Câmera/galeria para RF0007.
+- Câmera/galeria para RF0007 (mobile spec 012; painel web spec 011).
 
 ### IA (Python, pasta dentro do backend)
 - Endpoint(s) claros de comparação; contrato JSON documentado.
@@ -403,6 +404,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Web: edição da ONG em `/painel/ong` via sidebar; GET+PATCH `/ongs/me`; header só visual | Spec 008 / autora |
 | 2026-08-31 | Web: detalhe A/P/E em `/painel/animais/:id/detalhes`; nome clicável; GET por id; sem Editar/Excluir na página | Spec 009 / autora |
 | 2026-08-31 | Web: usuários em `/painel/usuarios`; GET+DELETE `/usuarios`; sem detalhe/editar/cadastro | Spec 010 / autora |
+| 2026-09-03 | Web: upload/captura da foto do animal no painel (spec 011); uma foto; obrigatória no cadastro (front); JPEG no canvas | Spec 011 / autora |
 
 ---
 
@@ -427,6 +429,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Edição de perfil da ONG no painel (spec 008)
 - [x] Detalhe do animal no painel (spec 009)
 - [x] Gerenciamento de usuários no painel (spec 010)
+- [x] Upload/captura de imagem no painel (spec 011)
 
 ---
 
@@ -452,3 +455,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Spec 008 web: edição da instituição em `/painel/ong` (sidebar); GET/PATCH `/ongs/me` |
 | 2026-08-31 | Spec 009 web: detalhe A/P/E (`/painel/animais/:id/detalhes`); nome clicável; GET `/animais/:id`; sem Editar no detalhe |
 | 2026-08-31 | Spec 010 web: listagem/exclusão de usuários em `/painel/usuarios`; GET/DELETE `/usuarios`; sem detalhe |
+| 2026-09-03 | Spec 011 web: upload/captura da foto do animal (card Fotos); obrigatória no cadastro; consome backend 010 |

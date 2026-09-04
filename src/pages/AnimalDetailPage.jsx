@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.js';
+import AnimalPhoto from '@/components/AnimalPhoto.jsx';
 import { buscarAnimalPorId } from '@/services/animaisService.js';
 import {
-  iniciaisNome,
   labelCidade,
   labelEspecie,
   labelIdade,
@@ -142,9 +142,12 @@ export default function AnimalDetailPage() {
       {!loading && animal ? (
         <>
           <section className={styles.hero}>
-            <span className={styles.photo} aria-hidden="true">
-              {iniciaisNome(animal.nome)}
-            </span>
+            <AnimalPhoto
+              src={animal.urlImagem}
+              nome={animal.nome}
+              variant="detail"
+              alt={`Foto de ${animal.nome}`}
+            />
             <div>
               <h2 className={styles.nome}>{animal.nome}</h2>
               <p className={styles.meta}>
