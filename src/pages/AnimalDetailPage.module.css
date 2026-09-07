@@ -25,10 +25,33 @@
   color: var(--painel-muted);
 }
 
-.hero {
-  display: flex;
-  align-items: center;
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
   gap: 1rem;
+  align-items: start;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.heroBody {
+  background: var(--painel-surface);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.04);
+  padding: 1.1rem 1.35rem 1.25rem;
+}
+
+.photoPanel {
+  min-width: 0;
+  background: var(--painel-surface);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.04);
+  overflow: hidden;
 }
 
 .nome {
@@ -55,13 +78,6 @@
   font-size: 0.78rem;
   font-weight: 700;
   padding: 0.15rem 0.65rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
-  gap: 1rem;
-  align-items: start;
 }
 
 .card {
@@ -144,9 +160,16 @@
 }
 
 @media (max-width: 900px) {
-  .grid,
+  .layout,
   .fields {
     grid-template-columns: 1fr;
+  }
+
+  .photoPanel {
+    order: -1;
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
   }
 
   .footer {

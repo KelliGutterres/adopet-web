@@ -22,9 +22,9 @@
   font-size: 0.82rem;
 }
 
-.detail {
-  width: 72px;
-  height: 72px;
+.hero {
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 12px;
-  font-size: 1.5rem;
+  font-size: 3.5rem;
 }

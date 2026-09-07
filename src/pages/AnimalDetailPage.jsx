@@ -141,64 +141,67 @@ export default function AnimalDetailPage() {
 
       {!loading && animal ? (
         <>
-          <section className={styles.hero}>
-            <AnimalPhoto
-              src={animal.urlImagem}
-              nome={animal.nome}
-              variant="detail"
-              alt={`Foto de ${animal.nome}`}
-            />
-            <div>
-              <h2 className={styles.nome}>{animal.nome}</h2>
-              <p className={styles.meta}>
-                <span>ID: #{animal.idAnimal}</span>
-                {statusLabel ? <span className={styles.chip}>{statusLabel}</span> : null}
-              </p>
-            </div>
-          </section>
+          <div className={styles.layout}>
+            <div className={styles.info}>
+              <header className={styles.heroBody}>
+                <h2 className={styles.nome}>{animal.nome}</h2>
+                <p className={styles.meta}>
+                  <span>ID: #{animal.idAnimal}</span>
+                  {statusLabel ? <span className={styles.chip}>{statusLabel}</span> : null}
+                </p>
+              </header>
 
-          <div className={styles.grid}>
-            <section className={styles.card}>
-              <h2>Informações básicas</h2>
-              <dl className={styles.fields}>
-                <div>
-                  <dt>Espécie</dt>
-                  <dd>{labelEspecie(animal.especie)}</dd>
-                </div>
-                <div>
-                  <dt>Raça</dt>
-                  <dd>{animal.raca?.nome || '—'}</dd>
-                </div>
-                <div>
-                  <dt>Idade</dt>
-                  <dd>{labelIdade(animal.idade)}</dd>
-                </div>
-                <div>
-                  <dt>Porte</dt>
-                  <dd>{labelPorte(animal.porte)}</dd>
-                </div>
-                <div className={styles.full}>
-                  <dt>Descrição</dt>
-                  <dd className={styles.descricao}>{animal.descricao || '—'}</dd>
-                </div>
-                {responsavel?.value ? (
-                  <div className={styles.full}>
-                    <dt>{responsavel.label}</dt>
-                    <dd>{responsavel.value}</dd>
+              <section className={styles.card}>
+                <h2>Informações básicas</h2>
+                <dl className={styles.fields}>
+                  <div>
+                    <dt>Espécie</dt>
+                    <dd>{labelEspecie(animal.especie)}</dd>
                   </div>
-                ) : null}
-              </dl>
-            </section>
+                  <div>
+                    <dt>Raça</dt>
+                    <dd>{animal.raca?.nome || '—'}</dd>
+                  </div>
+                  <div>
+                    <dt>Idade</dt>
+                    <dd>{labelIdade(animal.idade)}</dd>
+                  </div>
+                  <div>
+                    <dt>Porte</dt>
+                    <dd>{labelPorte(animal.porte)}</dd>
+                  </div>
+                  <div className={styles.full}>
+                    <dt>Descrição</dt>
+                    <dd className={styles.descricao}>{animal.descricao || '—'}</dd>
+                  </div>
+                  {responsavel?.value ? (
+                    <div className={styles.full}>
+                      <dt>{responsavel.label}</dt>
+                      <dd>{responsavel.value}</dd>
+                    </div>
+                  ) : null}
+                </dl>
+              </section>
 
-            <section className={styles.card}>
-              <h2>Localização</h2>
-              <dl className={styles.fields}>
-                <div className={styles.full}>
-                  <dt>Localização</dt>
-                  <dd>{labelCidade(animal.cidade)}</dd>
-                </div>
-              </dl>
-            </section>
+              <section className={styles.card}>
+                <h2>Localização</h2>
+                <dl className={styles.fields}>
+                  <div className={styles.full}>
+                    <dt>Localização</dt>
+                    <dd>{labelCidade(animal.cidade)}</dd>
+                  </div>
+                </dl>
+              </section>
+            </div>
+
+            <aside className={styles.photoPanel}>
+              <AnimalPhoto
+                src={animal.urlImagem}
+                nome={animal.nome}
+                variant="hero"
+                alt={`Foto de ${animal.nome}`}
+              />
+            </aside>
           </div>
 
           <div className={styles.footer}>
