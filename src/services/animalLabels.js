@@ -52,16 +52,15 @@ export function labelCidade(cidade) {
 }
 
 export function labelResponsavel(animal) {
-  if (animal?.status === 'A') {
-    return {
-      label: 'ONG responsável',
-      value: animal?.instituicao?.nome || animal?.usuario?.nome || '',
-    };
-  }
+  const tutor =
+    animal?.status === 'A'
+      ? animal?.instituicao || animal?.usuario || null
+      : animal?.usuario || animal?.instituicao || null;
 
   return {
-    label: 'Cadastrado por',
-    value: animal?.usuario?.nome || animal?.instituicao?.nome || '',
+    label: animal?.status === 'A' ? 'ONG responsável' : 'Cadastrado por',
+    value: tutor?.nome || '',
+    contato: tutor?.contato || '',
   };
 }
 

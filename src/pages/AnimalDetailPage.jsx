@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.js';
 import AnimalPhoto from '@/components/AnimalPhoto.jsx';
+import { WhatsAppIcon } from '@/components/AuthIcons.jsx';
 import { buscarAnimalPorId } from '@/services/animaisService.js';
 import {
   labelCidade,
@@ -11,6 +12,7 @@ import {
   labelResponsavel,
   labelStatus,
 } from '@/services/animalLabels.js';
+import { whatsappHref } from '@/services/whatsapp.js';
 import { normalizeStatus, pathFromStatus } from './animaisListConfig.js';
 import styles from './AnimalDetailPage.module.css';
 
@@ -102,6 +104,9 @@ export default function AnimalDetailPage() {
 
   const responsavel = animal ? labelResponsavel(animal) : null;
   const statusLabel = animal ? labelStatus(animal.status) : '';
+  const whatsappUrl = animal
+    ? whatsappHref(responsavel?.contato, { nomeAnimal: animal.nome })
+    : null;
 
   return (
     <div className={styles.page}>
@@ -177,7 +182,21 @@ export default function AnimalDetailPage() {
                   {responsavel?.value ? (
                     <div className={styles.full}>
                       <dt>{responsavel.label}</dt>
-                      <dd>{responsavel.value}</dd>
+                      <dd className={styles.responsavel}>
+                        <span>{responsavel.value}</span>
+                        {whatsappUrl ? (
+                          <a
+                            className={styles.whatsapp}
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Conversar no WhatsApp com ${responsavel.value}`}
+                          >
+                            <WhatsAppIcon />
+                            WhatsApp
+                          </a>
+                        ) : null}
+                      </dd>
                     </div>
                   ) : null}
                 </dl>

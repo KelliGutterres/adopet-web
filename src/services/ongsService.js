@@ -5,10 +5,10 @@ export async function buscarMe() {
   return data?.ong ?? null;
 }
 
-export async function atualizarMe({ nome, email, cidade }) {
+export async function atualizarMe({ nome, email, contato, cidade }) {
   const data = await requestJson('/ongs/me', {
     method: 'PATCH',
-    body: { nome, email, cidade },
+    body: { nome, email, contato, cidade },
   });
   return data?.ong ?? null;
 }

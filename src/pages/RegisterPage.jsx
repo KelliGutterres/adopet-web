@@ -3,16 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import AuthLayout from '@/components/AuthLayout.jsx';
 import PasswordField from '@/components/PasswordField.jsx';
 import TextField from '@/components/TextField.jsx';
-import { BuildingIcon, MailIcon, MapPinIcon, UserPlusIcon } from '@/components/AuthIcons.jsx';
+import { BuildingIcon, MailIcon, MapPinIcon, PhoneIcon, UserPlusIcon } from '@/components/AuthIcons.jsx';
 import styles from '@/components/AuthForm.module.css';
 import { useAuth } from '@/hooks/useAuth.js';
-import { isEmailValid, isUfValid, MIN_SENHA } from '@/services/authService.js';
+import {
+  isEmailValid,
+  isPhoneValid,
+  isUfValid,
+  maskPhone,
+  MIN_SENHA,
+  unmaskPhone,
+} from '@/services/authService.js';
 
 export default function RegisterPage() {
   const { cadastrar } = useAuth();
   const navigate = useNavigate();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
+  const [contato, setContato] = useState('');
   const [cidade, setCidade] = useState('');
   const [uf, setUf] = useState('');
   const [senha, setSenha] = useState('');
@@ -34,6 +42,14 @@ export default function RegisterPage() {
     }
     if (!isEmailValid(email)) {
       setError('Informe um e-mail válido');
+      return;
+    }
+    if (!unmaskPhone(contato)) {
+      setError('Informe o contato');
+      return;
+    }
+    if (!isPhoneValid(contato)) {
+      setError('Informe um contato válido');
       return;
     }
     if (!cidadeTrim) {
@@ -59,6 +75,7 @@ export default function RegisterPage() {
         nome: nomeTrim,
         email: email.trim(),
         senha,
+        contato: unmaskPhone(contato),
         cidade: { nome: cidadeTrim, uf: ufNorm },
       });
       navigate('/painel', { replace: true });
@@ -102,6 +119,18 @@ export default function RegisterPage() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           icon={<MailIcon />}
+        />
+        <TextField
+          id="contato"
+          label="Contato"
+          type="tel"
+          name="tel"
+          autoComplete="tel"
+          inputMode="numeric"
+          placeholder="(51) 99999-9999"
+          value={contato}
+          onChange={(event) => setContato(maskPhone(event.target.value))}
+          icon={<PhoneIcon />}
         />
         <div className={styles.row}>
           <TextField

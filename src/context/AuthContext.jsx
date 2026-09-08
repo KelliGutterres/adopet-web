@@ -94,8 +94,8 @@ export function AuthProvider({ children }) {
         setToken(result.token);
         setOng(result.ong);
       },
-      async cadastrar({ nome, email, senha, cidade }) {
-        const result = await cadastrarOng({ nome, email, senha, cidade });
+      async cadastrar({ nome, email, senha, contato, cidade }) {
+        const result = await cadastrarOng({ nome, email, senha, contato, cidade });
         saveSession(result.token, result.ong);
         setToken(result.token);
         setOng(result.ong);

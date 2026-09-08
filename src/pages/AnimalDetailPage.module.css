@@ -117,8 +117,36 @@
   overflow-wrap: anywhere;
 }
 
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  min-height: 44px;
+  color: var(--painel-text);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.whatsapp:hover {
+  color: #128c7e;
+}
+
+.whatsapp:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
 .descricao {
   white-space: pre-wrap;
+}
+
+.responsavel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .footer {

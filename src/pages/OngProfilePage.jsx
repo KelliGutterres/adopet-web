@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.js';
-import { isEmailValid, isUfValid } from '@/services/authService.js';
+import { isEmailValid, isPhoneValid, isUfValid, maskPhone, unmaskPhone } from '@/services/authService.js';
 import { atualizarMe, buscarMe } from '@/services/ongsService.js';
 import styles from './OngProfilePage.module.css';
 
@@ -12,6 +12,7 @@ const NOME_MAX = 100;
 const EMPTY_FORM = {
   nome: '',
   email: '',
+  contato: '',
   cidade: '',
   uf: '',
 };
@@ -20,6 +21,7 @@ function formFromOng(ong) {
   return {
     nome: ong?.nome || '',
     email: ong?.email || '',
+    contato: ong?.contato ? maskPhone(ong.contato) : '',
     cidade: ong?.cidade?.nome || '',
     uf: (ong?.cidade?.uf || '').toUpperCase(),
   };
@@ -29,6 +31,7 @@ function normalizeForm(form) {
   return {
     nome: form.nome.trim(),
     email: form.email.trim().toLowerCase(),
+    contato: unmaskPhone(form.contato),
     cidade: form.cidade.trim(),
     uf: form.uf.trim().toUpperCase(),
   };
@@ -44,6 +47,12 @@ function validate(form) {
   }
   if (!isEmailValid(form.email)) {
     return 'Informe um e-mail válido';
+  }
+  if (!unmaskPhone(form.contato)) {
+    return 'Informe o contato';
+  }
+  if (!isPhoneValid(form.contato)) {
+    return 'Informe um contato válido';
   }
   if (!form.cidade.trim()) {
     return 'Informe a cidade';
@@ -117,6 +126,9 @@ export default function OngProfilePage() {
       if (field === 'uf') {
         value = value.replace(/[^a-zA-Z]/g, '').slice(0, 2).toUpperCase();
       }
+      if (field === 'contato') {
+        value = maskPhone(value);
+      }
       setSuccess('');
       setForm((current) => ({ ...current, [field]: value }));
     };
@@ -156,6 +168,7 @@ export default function OngProfilePage() {
       const ong = await atualizarMe({
         nome: normalized.nome,
         email: normalized.email,
+        contato: normalized.contato,
         cidade: { nome: normalized.cidade, uf: normalized.uf },
       });
       if (!ong) {
@@ -232,6 +245,22 @@ export default function OngProfilePage() {
                   autoComplete="email"
                   value={form.email}
                   onChange={updateField('email')}
+                  required
+                  aria-required="true"
+                />
+              </label>
+
+              <label className={styles.full} htmlFor="contato">
+                Contato
+                <input
+                  id="contato"
+                  name="contato"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="numeric"
+                  placeholder="(51) 99999-9999"
+                  value={form.contato}
+                  onChange={updateField('contato')}
                   required
                   aria-required="true"
                 />

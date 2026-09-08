@@ -12,6 +12,7 @@ export default function TextField({
   icon,
   maxLength,
   className,
+  inputMode,
 }) {
   const wrapClass = [styles.inputWrap, icon ? '' : styles.noIcon].filter(Boolean).join(' ');
   const fieldClass = [styles.field, className].filter(Boolean).join(' ');
@@ -30,6 +31,7 @@ export default function TextField({
           value={value}
           onChange={onChange}
           maxLength={maxLength}
+          inputMode={inputMode}
         />
       </div>
     </div>

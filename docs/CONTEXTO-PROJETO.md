@@ -154,6 +154,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] CRUD de animais no painel (A/P/E; ONG admin edita qualquer um) — RF0003 / RF0010 (spec 007)
 - [x] Edição dos dados da própria ONG no painel (`/painel/ong`) — RF0009 parcial (spec 008)
 - [x] Detalhe do animal no painel (A/P/E; `GET /animais/:id`) — RF0006 (spec 009; foto real na spec 011)
+- [x] WhatsApp no detalhe + contato no cadastro/perfil da ONG — spec 012
 - [x] Gerenciamento de usuários no painel (listar / excluir) — RF0010 (spec 010)
 - [x] Upload/captura de imagem no painel (card Fotos; uma foto) — RF0007 (spec 011)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
@@ -405,6 +406,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Web: detalhe A/P/E em `/painel/animais/:id/detalhes`; nome clicável; GET por id; sem Editar/Excluir na página | Spec 009 / autora |
 | 2026-08-31 | Web: usuários em `/painel/usuarios`; GET+DELETE `/usuarios`; sem detalhe/editar/cadastro | Spec 010 / autora |
 | 2026-09-03 | Web: upload/captura da foto do animal no painel (spec 011); uma foto; obrigatória no cadastro (front); JPEG no canvas | Spec 011 / autora |
+| 2026-09-07 | Contato WhatsApp no detalhe + `contato` no cadastro/perfil da ONG (web spec 012; consome backend 011) | Spec 012 / autora |
 
 ---
 
@@ -430,6 +432,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Detalhe do animal no painel (spec 009)
 - [x] Gerenciamento de usuários no painel (spec 010)
 - [x] Upload/captura de imagem no painel (spec 011)
+- [x] Contato WhatsApp do responsável no detalhe + contato da ONG (spec 012)
 
 ---
 
@@ -456,3 +459,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Spec 009 web: detalhe A/P/E (`/painel/animais/:id/detalhes`); nome clicável; GET `/animais/:id`; sem Editar no detalhe |
 | 2026-08-31 | Spec 010 web: listagem/exclusão de usuários em `/painel/usuarios`; GET/DELETE `/usuarios`; sem detalhe |
 | 2026-09-03 | Spec 011 web: upload/captura da foto do animal (card Fotos); obrigatória no cadastro; consome backend 010 |
+| 2026-09-07 | Spec 012 web: WhatsApp no detalhe (`wa.me`); contato no cadastro/perfil da ONG; consome backend 011 |
