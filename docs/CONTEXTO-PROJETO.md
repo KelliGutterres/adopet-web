@@ -168,14 +168,14 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Auth usuário e ONG; senhas criptografadas (RNF0002)
 - [ ] CRUD usuários, instituições/ONGs, animais, etc.
 - [ ] Integração Supabase Storage (upload/recuperação; salvar só URL/referência no PostgreSQL)
-- [ ] Integração com serviço Python de comparação de imagens
+- [ ] Integração com serviço Python de comparação de imagens — **API no backend spec 012**; UI do painel fora desta fatia
 - [ ] Filtros e listagens conforme RF0004–RF0006
 
 ### Serviço de IA (Python — dentro de `adopet-backend`)
-- [ ] Pasta `ai/` (ou similar) no mesmo repositório do backend
-- [ ] Receber imagem enviada pelo usuário (via API Node)
-- [ ] Comparar com imagens já cadastradas
-- [ ] Retornar similaridades / candidatos ao backend Node
+- [x] Pasta `ai/` (ou similar) no mesmo repositório do backend
+- [x] Receber imagem enviada pelo usuário (via API Node)
+- [x] Comparar com imagens já cadastradas
+- [x] Retornar similaridades / candidatos ao backend Node
 
 ---
 
@@ -407,6 +407,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Web: usuários em `/painel/usuarios`; GET+DELETE `/usuarios`; sem detalhe/editar/cadastro | Spec 010 / autora |
 | 2026-09-03 | Web: upload/captura da foto do animal no painel (spec 011); uma foto; obrigatória no cadastro (front); JPEG no canvas | Spec 011 / autora |
 | 2026-09-07 | Contato WhatsApp no detalhe + `contato` no cadastro/perfil da ONG (web spec 012; consome backend 011) | Spec 012 / autora |
+| 2026-09-14 | IA no backend (spec 012): ResNet50 local; `POST /animais/comparar`; painel web ainda sem tela de busca por foto | Backend spec 012 |
 
 ---
 
