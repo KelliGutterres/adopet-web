@@ -144,7 +144,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Filtros: situação, espécie, porte, idade, localização, status — RF0005
 - [ ] Detalhes do animal (fotos, descrição, localização) — RF0006
 - [x] Upload por galeria ou câmera — RF0007 (mobile spec 012; web spec 011)
-- [ ] Comparação inteligente de imagens — RF0008
+- [x] Comparação inteligente de imagens — RF0008 (mobile spec 016; consome backend spec 012; web ainda sem tela)
 - [ ] Telas de protótipo: autenticação/cadastro; listagem de animais
 
 ### Web (ONG = administrador do painel)
@@ -408,6 +408,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-03 | Web: upload/captura da foto do animal no painel (spec 011); uma foto; obrigatória no cadastro (front); JPEG no canvas | Spec 011 / autora |
 | 2026-09-07 | Contato WhatsApp no detalhe + `contato` no cadastro/perfil da ONG (web spec 012; consome backend 011) | Spec 012 / autora |
 | 2026-09-14 | IA no backend (spec 012): ResNet50 local; `POST /animais/comparar`; painel web ainda sem tela de busca por foto | Backend spec 012 |
+| 2026-09-15 | Mobile spec 016 consome a comparação de imagens; painel web continua sem busca por foto | Mobile spec 016 |
 
 ---
 
@@ -461,3 +462,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-08-31 | Spec 010 web: listagem/exclusão de usuários em `/painel/usuarios`; GET/DELETE `/usuarios`; sem detalhe |
 | 2026-09-03 | Spec 011 web: upload/captura da foto do animal (card Fotos); obrigatória no cadastro; consome backend 010 |
 | 2026-09-07 | Spec 012 web: WhatsApp no detalhe (`wa.me`); contato no cadastro/perfil da ONG; consome backend 011 |
+| 2026-09-15 | Mobile spec 016: busca por foto no app; painel web continua sem similaridade |
