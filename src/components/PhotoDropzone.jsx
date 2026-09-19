@@ -32,7 +32,7 @@ export default function PhotoDropzone({
     }
 
     if (fileList.length > 1) {
-      onError('Envie só uma foto.');
+      onError('Envie apenas uma foto!');
     }
 
     setPreparing(true);
@@ -41,7 +41,7 @@ export default function PhotoDropzone({
       const jpeg = await fileToJpegFile(fileList[0]);
       onFile(jpeg);
     } catch (err) {
-      onError(err.message || 'Não foi possível preparar a foto.');
+      onError(err.message || 'Não foi possível preparar a foto!');
     } finally {
       setPreparing(false);
       onPreparing?.(false);
@@ -63,7 +63,7 @@ export default function PhotoDropzone({
   }
 
   function handleInputChange(event) {
-    const files = event.target.files;
+    const files = Array.from(event.target.files || []);
     event.target.value = '';
     handleFiles(files);
   }
