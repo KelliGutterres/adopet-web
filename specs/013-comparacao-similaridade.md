@@ -86,7 +86,7 @@ Não há print de similaridade na Parte 1 (Fig. 16 = cadastro; Fig. 17 = ediçã
 - Alterar o `adopet-backend` (limiar, limite, modelo, `Transacao`, embedding)
 - Guardar a foto da busca no Storage
 - Comparar animais de **adoção**
-- Query `limite` / `minScore` / `statusAlvo` na UI (usar **padrão da API**: 5, 0,5, `P,E`)
+- Query `limite` / `minScore` / `statusAlvo` na UI (usar **padrão da API**: 5, 0,6, `P,E`)
 - Botão câmera / “Buscar por foto” nas listas A/P/E (entrada **só** pelo menu)
 - Editar / excluir candidato a partir desta tela (CRUD continua nas listas)
 - Filtros avançados (RF0005) sobre o ranking
@@ -117,7 +117,7 @@ Não há print de similaridade na Parte 1 (Fig. 16 = cadastro; Fig. 17 = ediçã
 | Já pronto | Onde |
 |-----------|------|
 | `POST /animais/comparar` JWT `usuario` **ou** `ong`; campo `imagem`; 200 `{ candidatos }`; 503 se Python fora | backend spec 012 |
-| Padrão: `limite=5`, `minScore=0.5`, `statusAlvo=P,E`; lista vazia ainda 200 | backend spec 012 |
+| Padrão: `limite=5`, `minScore=0.6`, `statusAlvo=P,E`; lista vazia ainda 200 | backend spec 012 |
 | `animal` no candidato = mesmo formato do `GET /animais/:id` (sem `embedding`) | backend spec 012 |
 | `PhotoDropzone` + `fileToJpegFile` | spec 011 |
 | `requestForm` (multipart, sem `Content-Type: application/json`) | spec 011 / `api.js` |

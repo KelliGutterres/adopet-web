@@ -412,6 +412,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-15 | Mobile spec 016 consome a comparação de imagens; painel web continua sem busca por foto | Mobile spec 016 |
 | 2026-09-19 | Web: comparação de similaridade no painel (spec 013); menu **Comparação de Similaridade**; consome `POST /animais/comparar`; sem atalho nas listas | Spec 013 / autora |
 | 2026-09-28 | Web: spec 013 implementada em `/painel/similaridade`; timeout de 90 s só em `POST /animais/comparar`; tabela com score e situação | Spec 013 / autora |
+| 2026-09-28 | Resultados da comparação: a API devolve até 5 candidatos com score ≥ 60%; o painel lista só esses | Backend spec 012 |
 
 ---
 
@@ -469,3 +470,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-15 | Mobile spec 016: busca por foto no app; painel web continua sem similaridade |
 | 2026-09-19 | Spec 013 web (em revisão): Comparação de Similaridade no menu; PhotoDropzone → `POST /animais/comparar`; tabela com score + situação |
 | 2026-09-28 | Spec 013 web implementada: `/painel/similaridade`; comparação na hora após o JPEG; timeout 90 s; sem atalho nas listas A/P/E |
+| 2026-09-28 | Corte da comparação sobe para 60% na API (`minScore` 0,6); a tabela continua mostrando o que `POST /animais/comparar` devolve |
