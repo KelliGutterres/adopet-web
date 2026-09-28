@@ -52,6 +52,11 @@
   flex-shrink: 0;
 }
 
+.item span {
+  min-width: 0;
+  line-height: 1.25;
+}
+
 .active {
   background: var(--painel-primary-soft);
   color: var(--painel-primary);

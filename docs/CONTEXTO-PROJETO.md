@@ -113,7 +113,7 @@ adopet-web/
 └── vite.config.js
 ```
 
-> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010. Upload de foto no painel: spec 011.
+> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010. Upload de foto no painel: spec 011. Comparação de similaridade: spec 013.
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
@@ -144,7 +144,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Filtros: situação, espécie, porte, idade, localização, status — RF0005
 - [ ] Detalhes do animal (fotos, descrição, localização) — RF0006
 - [x] Upload por galeria ou câmera — RF0007 (mobile spec 012; web spec 011)
-- [x] Comparação inteligente de imagens — RF0008 (mobile spec 016; consome backend spec 012; web ainda sem tela)
+- [x] Comparação inteligente de imagens — RF0008 (mobile spec 016; painel web spec 013; consome backend spec 012)
 - [ ] Telas de protótipo: autenticação/cadastro; listagem de animais
 
 ### Web (ONG = administrador do painel)
@@ -157,6 +157,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] WhatsApp no detalhe + contato no cadastro/perfil da ONG — spec 012
 - [x] Gerenciamento de usuários no painel (listar / excluir) — RF0010 (spec 010)
 - [x] Upload/captura de imagem no painel (card Fotos; uma foto) — RF0007 (spec 011)
+- [x] Comparação de similaridade no painel (menu + foto → candidatos P/E) — RF0008 (spec 013)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
@@ -168,7 +169,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Auth usuário e ONG; senhas criptografadas (RNF0002)
 - [ ] CRUD usuários, instituições/ONGs, animais, etc.
 - [ ] Integração Supabase Storage (upload/recuperação; salvar só URL/referência no PostgreSQL)
-- [ ] Integração com serviço Python de comparação de imagens — **API no backend spec 012**; UI do painel fora desta fatia
+- [x] Integração com serviço Python de comparação de imagens — **API no backend spec 012**; UI do painel: **web spec 013**
 - [ ] Filtros e listagens conforme RF0004–RF0006
 
 ### Serviço de IA (Python — dentro de `adopet-backend`)
@@ -340,7 +341,7 @@ Critério de pronto: [comportamento verificável]
 - Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
 - Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
-- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel`, `/painel/ong`, `/painel/usuarios` e `/painel/animais/:id/detalhes` (JWT ONG).
+- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel`, `/painel/ong`, `/painel/usuarios`, `/painel/similaridade` e `/painel/animais/:id/detalhes` (JWT ONG).
 - Sessão: JWT + dados da ONG em `localStorage`; `Authorization: Bearer` no `api.js`.
 
 ### Mobile (React Native)
@@ -409,6 +410,8 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-07 | Contato WhatsApp no detalhe + `contato` no cadastro/perfil da ONG (web spec 012; consome backend 011) | Spec 012 / autora |
 | 2026-09-14 | IA no backend (spec 012): ResNet50 local; `POST /animais/comparar`; painel web ainda sem tela de busca por foto | Backend spec 012 |
 | 2026-09-15 | Mobile spec 016 consome a comparação de imagens; painel web continua sem busca por foto | Mobile spec 016 |
+| 2026-09-19 | Web: comparação de similaridade no painel (spec 013); menu **Comparação de Similaridade**; consome `POST /animais/comparar`; sem atalho nas listas | Spec 013 / autora |
+| 2026-09-28 | Web: spec 013 implementada em `/painel/similaridade`; timeout de 90 s só em `POST /animais/comparar`; tabela com score e situação | Spec 013 / autora |
 
 ---
 
@@ -435,6 +438,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Gerenciamento de usuários no painel (spec 010)
 - [x] Upload/captura de imagem no painel (spec 011)
 - [x] Contato WhatsApp do responsável no detalhe + contato da ONG (spec 012)
+- [x] Comparação de similaridade no painel (spec 013)
 
 ---
 
@@ -463,3 +467,5 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-03 | Spec 011 web: upload/captura da foto do animal (card Fotos); obrigatória no cadastro; consome backend 010 |
 | 2026-09-07 | Spec 012 web: WhatsApp no detalhe (`wa.me`); contato no cadastro/perfil da ONG; consome backend 011 |
 | 2026-09-15 | Mobile spec 016: busca por foto no app; painel web continua sem similaridade |
+| 2026-09-19 | Spec 013 web (em revisão): Comparação de Similaridade no menu; PhotoDropzone → `POST /animais/comparar`; tabela com score + situação |
+| 2026-09-28 | Spec 013 web implementada: `/painel/similaridade`; comparação na hora após o JPEG; timeout 90 s; sem atalho nas listas A/P/E |

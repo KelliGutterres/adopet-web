@@ -1,5 +1,11 @@
 import AnimalPhoto from '@/components/AnimalPhoto.jsx';
-import { labelEspecie, labelIdade, labelPorte } from '@/services/animalLabels.js';
+import {
+  labelEspecie,
+  labelIdade,
+  labelPorte,
+  labelScoreSimilarity,
+  labelStatus,
+} from '@/services/animalLabels.js';
 import styles from './AnimalTable.module.css';
 
 function PencilIcon() {
@@ -21,58 +27,89 @@ function TrashIcon() {
   );
 }
 
-export default function AnimalTable({ animais, onOpen, onEdit, onDelete }) {
+export default function AnimalTable({ animais, onOpen, onEdit, onDelete, variant = 'crud' }) {
+  const isSimilarity = variant === 'similarity';
+
   return (
     <div className={styles.wrap}>
-      <table className={styles.table}>
+      <table className={`${styles.table} ${isSimilarity ? styles.similarity : ''}`}>
         <thead>
           <tr>
+            {isSimilarity ? (
+              <>
+                <th>Similaridade</th>
+                <th>Situação</th>
+              </>
+            ) : null}
             <th>Animal</th>
             <th>Espécie / Raça</th>
             <th>Idade</th>
             <th>Porte</th>
-            <th>Ações</th>
+            {isSimilarity ? null : <th>Ações</th>}
           </tr>
         </thead>
         <tbody>
-          {animais.map((animal) => (
-            <tr key={animal.idAnimal}>
-              <td>
-                <div className={styles.animal}>
-                  <AnimalPhoto src={animal.urlImagem} nome={animal.nome} variant="table" alt="" />
-                  <span>
-                    <button
-                      type="button"
-                      className={styles.nameLink}
-                      onClick={() => onOpen(animal)}
-                      aria-label={`Ver detalhes de ${animal.nome}`}
-                    >
-                      {animal.nome}
-                    </button>
-                    <small>ID: #{animal.idAnimal}</small>
-                  </span>
-                </div>
-              </td>
-              <td>
-                {labelEspecie(animal.especie)}
-                {animal.raca?.nome ? ` ${animal.raca.nome}` : ''}
-              </td>
-              <td>{labelIdade(animal.idade)}</td>
-              <td>{labelPorte(animal.porte)}</td>
-              <td>
-                <div className={styles.actions}>
-                  <button type="button" className={styles.edit} onClick={() => onEdit(animal)}>
-                    <PencilIcon />
-                    Editar
-                  </button>
-                  <button type="button" className={styles.remove} onClick={() => onDelete(animal)}>
-                    <TrashIcon />
-                    Excluir
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
+          {animais.map((item) => {
+            const animal = isSimilarity ? item.animal : item;
+            if (!animal?.idAnimal) {
+              return null;
+            }
+            const scoreLabel = isSimilarity ? labelScoreSimilarity(item.scoreSimilarity) : '';
+
+            return (
+              <tr key={animal.idAnimal}>
+                {isSimilarity ? (
+                  <>
+                    <td>
+                      <span
+                        className={styles.score}
+                        aria-label={scoreLabel ? `${scoreLabel} semelhante` : undefined}
+                      >
+                        {scoreLabel}
+                      </span>
+                    </td>
+                    <td>{labelStatus(animal.status)}</td>
+                  </>
+                ) : null}
+                <td>
+                  <div className={styles.animal}>
+                    <AnimalPhoto src={animal.urlImagem} nome={animal.nome} variant="table" alt="" />
+                    <span>
+                      <button
+                        type="button"
+                        className={styles.nameLink}
+                        onClick={() => onOpen(animal)}
+                        aria-label={`Ver detalhes de ${animal.nome}`}
+                      >
+                        {animal.nome}
+                      </button>
+                      <small>ID: #{animal.idAnimal}</small>
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  {labelEspecie(animal.especie)}
+                  {animal.raca?.nome ? ` ${animal.raca.nome}` : ''}
+                </td>
+                <td>{labelIdade(animal.idade)}</td>
+                <td>{labelPorte(animal.porte)}</td>
+                {isSimilarity ? null : (
+                  <td>
+                    <div className={styles.actions}>
+                      <button type="button" className={styles.edit} onClick={() => onEdit(animal)}>
+                        <PencilIcon />
+                        Editar
+                      </button>
+                      <button type="button" className={styles.remove} onClick={() => onDelete(animal)}>
+                        <TrashIcon />
+                        Excluir
+                      </button>
+                    </div>
+                  </td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

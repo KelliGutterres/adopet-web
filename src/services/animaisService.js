@@ -57,6 +57,25 @@ export async function enviarImagem(id, file) {
   return data?.animal ?? null;
 }
 
+const COMPARE_TIMEOUT_MS = 90000;
+const COMPARE_TIMEOUT_MESSAGE = 'A comparação demorou demais. Tente novamente.';
+
+export async function compararAnimais(file) {
+  if (!(file instanceof Blob) || file.size === 0) {
+    throw new ApiError('imagem é obrigatório', 400);
+  }
+
+  const formData = new FormData();
+  formData.append('imagem', file, 'foto.jpg');
+
+  const data = await requestForm('/animais/comparar', formData, {
+    timeoutMs: COMPARE_TIMEOUT_MS,
+    timeoutMessage: COMPARE_TIMEOUT_MESSAGE,
+  });
+
+  return Array.isArray(data?.candidatos) ? data.candidatos : [];
+}
+
 export async function removerImagem(id) {
   const idAnimal = parseIdAnimal(id);
   if (!idAnimal) {

@@ -44,6 +44,17 @@ export function labelStatus(status) {
   return STATUS_LABELS[status] || '';
 }
 
+export function labelScoreSimilarity(score) {
+  if (score === null || score === undefined) {
+    return '';
+  }
+  const value = Number(score);
+  if (!Number.isFinite(value)) {
+    return '';
+  }
+  return `${Math.round(value * 100)}%`;
+}
+
 export function labelCidade(cidade) {
   if (!cidade?.nome) {
     return '—';

@@ -74,8 +74,16 @@ export async function requestJson(path, options = {}) {
 }
 
 export async function requestForm(path, formData, options = {}) {
-  const { method = 'POST', headers = {}, ...rest } = options;
+  const { method = 'POST', headers = {}, timeoutMs, timeoutMessage, ...rest } = options;
   const token = readToken();
+  const controller = timeoutMs ? new AbortController() : null;
+  let timedOut = false;
+  const timer = controller
+    ? setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, timeoutMs)
+    : null;
 
   let response;
   try {
@@ -87,9 +95,17 @@ export async function requestForm(path, formData, options = {}) {
       },
       body: formData,
       ...rest,
+      ...(controller ? { signal: controller.signal } : {}),
     });
-  } catch {
+  } catch (err) {
+    if (timedOut || err?.name === 'AbortError') {
+      throw new ApiError(timeoutMessage || NETWORK_ERROR_MESSAGE);
+    }
     throw new ApiError(NETWORK_ERROR_MESSAGE);
+  } finally {
+    if (timer) {
+      clearTimeout(timer);
+    }
   }
 
   return parseJsonResponse(response);

@@ -27,3 +27,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | [010](./010-gerenciamento-usuarios.md) | Gerenciamento de usuários no painel (listar / excluir) | aprovada e implementada |
 | [011](./011-upload-captura-imagem.md) | Upload e captura de imagem do animal (card Fotos) | aprovada e implementada |
 | [012](./012-contato-whatsapp-animal.md) | WhatsApp no detalhe + contato no cadastro/perfil da ONG | aprovada e implementada |
+| [013](./013-comparacao-similaridade.md) | Comparação de similaridade no painel (RF0008) | aprovada e implementada |

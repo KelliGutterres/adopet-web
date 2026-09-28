@@ -15,6 +15,9 @@ function CloudIcon() {
 export default function PhotoDropzone({
   previewUrl,
   disabled,
+  busy = false,
+  ariaLabel = 'Enviar foto do animal',
+  placeholder = 'Clique para enviar foto ou arraste e solte aqui',
   onFile,
   onRemove,
   onError,
@@ -84,11 +87,12 @@ export default function PhotoDropzone({
   return (
     <div className={styles.wrap}>
       <div
-        className={`${styles.dropzone} ${dragging ? styles.dragging : ''} ${previewUrl ? styles.hasPreview : ''}`}
+        className={`${styles.dropzone} ${dragging ? styles.dragging : ''} ${previewUrl ? styles.hasPreview : ''} ${disabled ? styles.disabled : ''}`}
         role="button"
         tabIndex={disabled ? -1 : 0}
-        aria-label="Enviar foto do animal"
-        aria-busy={preparing}
+        aria-label={ariaLabel}
+        aria-disabled={disabled || undefined}
+        aria-busy={preparing || busy}
         onClick={openFilePicker}
         onKeyDown={handleKeyDown}
         onDragEnter={(event) => {
@@ -109,9 +113,7 @@ export default function PhotoDropzone({
           <div className={styles.placeholder}>
             <CloudIcon />
             <p>
-              {preparing
-                ? 'Preparando foto…'
-                : 'Clique para enviar foto ou arraste e solte aqui'}
+              {preparing ? 'Preparando foto…' : placeholder}
             </p>
           </div>
         )}

@@ -8,6 +8,23 @@
   min-width: 680px;
 }
 
+.similarity {
+  min-width: 860px;
+}
+
+.score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--painel-primary-soft);
+  color: var(--painel-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
 .table th,
 .table td {
   text-align: left;

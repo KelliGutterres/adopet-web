@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { id: 'adocao', label: 'Animais para Adoção', to: '/painel/animais/adocao' },
   { id: 'encontrados', label: 'Animais Encontrados', to: '/painel/animais/encontrados' },
   { id: 'perdidos', label: 'Animais Perdidos', to: '/painel/animais/perdidos' },
+  { id: 'similaridade', label: 'Comparação de Similaridade', to: '/painel/similaridade' },
   { id: 'usuarios', label: 'Usuários', to: '/painel/usuarios' },
   { id: 'ong', label: 'ONG / Instituição', to: '/painel/ong' },
   { id: 'relatorios', label: 'Relatórios', disabled: true },
@@ -58,6 +59,13 @@ function Icon({ name }) {
         <svg {...common}>
           <circle cx="12" cy="12" r="9" />
           <path d="M12 8v4l2.5 2.5" />
+        </svg>
+      );
+    case 'similaridade':
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="12" r="5.5" />
+          <circle cx="15" cy="12" r="5.5" />
         </svg>
       );
     case 'usuarios':
@@ -133,7 +141,7 @@ export default function Sidebar({ open, onNavigate }) {
               aria-disabled="true"
             >
               <Icon name={item.id} />
-              {item.label}
+              <span>{item.label}</span>
             </span>
           ) : (
             <NavLink
@@ -145,7 +153,7 @@ export default function Sidebar({ open, onNavigate }) {
               onClick={onNavigate}
             >
               <Icon name={item.id} />
-              {item.label}
+              <span>{item.label}</span>
             </NavLink>
           ),
         )}
