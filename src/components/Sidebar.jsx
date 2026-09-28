@@ -14,8 +14,6 @@ const NAV_ITEMS = [
   { id: 'similaridade', label: 'Comparação de Similaridade', to: '/painel/similaridade' },
   { id: 'usuarios', label: 'Usuários', to: '/painel/usuarios' },
   { id: 'ong', label: 'ONG / Instituição', to: '/painel/ong' },
-  { id: 'relatorios', label: 'Relatórios', disabled: true },
-  { id: 'config', label: 'Configurações', disabled: true },
 ];
 
 function Icon({ name }) {
@@ -82,22 +80,6 @@ function Icon({ name }) {
         <svg {...common}>
           <path d="M4 20V9l8-5 8 5v11" />
           <path d="M10 20v-6h4v6" />
-        </svg>
-      );
-    case 'relatorios':
-      return (
-        <svg {...common}>
-          <path d="M4 19V9" />
-          <path d="M10 19V5" />
-          <path d="M16 19v-7" />
-          <path d="M22 19v-4" />
-        </svg>
-      );
-    case 'config':
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="3" />
-          <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c.3.6.9 1 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z" />
         </svg>
       );
     case 'sair':

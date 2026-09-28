@@ -158,6 +158,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Gerenciamento de usuários no painel (listar / excluir) — RF0010 (spec 010)
 - [x] Upload/captura de imagem no painel (card Fotos; uma foto) — RF0007 (spec 011)
 - [x] Comparação de similaridade no painel (menu + foto → candidatos P/E) — RF0008 (spec 013)
+- [x] Menu do painel sem Relatórios e Configurações (spec 014; Dashboard continua “Em breve”)
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
@@ -413,6 +414,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-19 | Web: comparação de similaridade no painel (spec 013); menu **Comparação de Similaridade**; consome `POST /animais/comparar`; sem atalho nas listas | Spec 013 / autora |
 | 2026-09-28 | Web: spec 013 implementada em `/painel/similaridade`; timeout de 90 s só em `POST /animais/comparar`; tabela com score e situação | Spec 013 / autora |
 | 2026-09-28 | Resultados da comparação: a API devolve até 5 candidatos com score ≥ 60%; o painel lista só esses | Backend spec 012 |
+| 2026-09-28 | Web: menu do painel sem **Relatórios** e **Configurações** (nunca tiveram tela); Dashboard continua “Em breve” | Spec 014 / autora |
 
 ---
 
@@ -440,6 +442,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Upload/captura de imagem no painel (spec 011)
 - [x] Contato WhatsApp do responsável no detalhe + contato da ONG (spec 012)
 - [x] Comparação de similaridade no painel (spec 013)
+- [x] Remoção de Relatórios e Configurações do menu (spec 014)
 
 ---
 
@@ -471,3 +474,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-19 | Spec 013 web (em revisão): Comparação de Similaridade no menu; PhotoDropzone → `POST /animais/comparar`; tabela com score + situação |
 | 2026-09-28 | Spec 013 web implementada: `/painel/similaridade`; comparação na hora após o JPEG; timeout 90 s; sem atalho nas listas A/P/E |
 | 2026-09-28 | Corte da comparação sobe para 60% na API (`minScore` 0,6); a tabela continua mostrando o que `POST /animais/comparar` devolve |
+| 2026-09-28 | Spec 014 web: Relatórios e Configurações saem da sidebar; Dashboard permanece desabilitado |
