@@ -29,3 +29,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | [012](./012-contato-whatsapp-animal.md) | WhatsApp no detalhe + contato no cadastro/perfil da ONG | aprovada e implementada |
 | [013](./013-comparacao-similaridade.md) | Comparação de similaridade no painel (RF0008) | aprovada e implementada |
 | [014](./014-remover-abas-relatorios-configuracoes.md) | Remover Relatórios e Configurações do menu | aprovada e implementada |
+| [015](./015-dashboard.md) | Dashboard do painel (métricas e filtro de período) | aprovada e implementada |

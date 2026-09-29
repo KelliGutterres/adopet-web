@@ -4,6 +4,7 @@ import PublicOnlyRoute from '@/components/PublicOnlyRoute.jsx';
 import { useAuth } from '@/hooks/useAuth.js';
 import PainelLayout from '@/layouts/PainelLayout.jsx';
 import AnimalDetailPage from '@/pages/AnimalDetailPage.jsx';
+import DashboardPage from '@/pages/DashboardPage.jsx';
 import AnimalFormPage from '@/pages/AnimalFormPage.jsx';
 import AnimaisListPage from '@/pages/AnimaisListPage.jsx';
 import OngProfilePage from '@/pages/OngProfilePage.jsx';
@@ -69,6 +70,7 @@ export default function App() {
           }
         >
           <Route index element={<Navigate to="animais/adocao" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="usuarios" element={<UsuariosListPage />} />
           <Route path="ong" element={<OngProfilePage />} />
           <Route path="similaridade" element={<SimilarityPage />} />

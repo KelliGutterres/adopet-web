@@ -61,6 +61,9 @@ export const PHOTO_UPLOAD_FAILED_NOTICE =
   'Animal salvo, mas a foto não foi enviada. Você pode adicioná-la ao editar.';
 
 export function listItemIdFromLocation(pathname, search) {
+  if (/\/painel\/dashboard\/?$/.test(pathname)) {
+    return 'dashboard';
+  }
   if (/\/painel\/similaridade\/?$/.test(pathname)) {
     return 'similaridade';
   }

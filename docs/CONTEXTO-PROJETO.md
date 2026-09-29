@@ -113,7 +113,7 @@ adopet-web/
 └── vite.config.js
 ```
 
-> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010. Upload de foto no painel: spec 011. Comparação de similaridade: spec 013.
+> Login JWT, `/painel` e AuthContext: spec 002. Detalhe A/P/E: spec 009. Usuários: spec 010. Upload de foto no painel: spec 011. Comparação de similaridade: spec 013. Dashboard: spec 015 (consome backend spec 014).
 
 > Este workspace atual (`AdoPetMobile-main`) pode ser o ponto de partida do mobile ou da documentação; ao criar os outros repos, copiar/adaptar `docs/CONTEXTO-PROJETO.md` e `.cursor/rules/`.
 
@@ -158,7 +158,8 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Gerenciamento de usuários no painel (listar / excluir) — RF0010 (spec 010)
 - [x] Upload/captura de imagem no painel (card Fotos; uma foto) — RF0007 (spec 011)
 - [x] Comparação de similaridade no painel (menu + foto → candidatos P/E) — RF0008 (spec 013)
-- [x] Menu do painel sem Relatórios e Configurações (spec 014; Dashboard continua “Em breve”)
+- [x] Menu do painel sem Relatórios e Configurações (spec 014)
+- [x] Dashboard do painel (cadastros A/P/E e adotados; 7 dias, 1 mês, 3 meses) — spec 015
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
@@ -342,7 +343,7 @@ Critério de pronto: [comportamento verificável]
 - Cliente HTTP: `fetch` em `src/services/api.js`; base URL em `VITE_API_URL`.
 - Estilo: `global.css` + CSS Modules (sem Tailwind nesta fase).
 - Painel da ONG focado em gestão (CRUD), responsivo (RNF0006).
-- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel`, `/painel/ong`, `/painel/usuarios`, `/painel/similaridade` e `/painel/animais/:id/detalhes` (JWT ONG).
+- Rotas: `/` redireciona; `/login`, `/cadastro`, `/esqueci-senha` (públicas); `/painel`, `/painel/dashboard`, `/painel/ong`, `/painel/usuarios`, `/painel/similaridade` e `/painel/animais/:id/detalhes` (JWT ONG).
 - Sessão: JWT + dados da ONG em `localStorage`; `Authorization: Bearer` no `api.js`.
 
 ### Mobile (React Native)
@@ -415,6 +416,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Web: spec 013 implementada em `/painel/similaridade`; timeout de 90 s só em `POST /animais/comparar`; tabela com score e situação | Spec 013 / autora |
 | 2026-09-28 | Resultados da comparação: a API devolve até 5 candidatos com score ≥ 60%; o painel lista só esses | Backend spec 012 |
 | 2026-09-28 | Web: menu do painel sem **Relatórios** e **Configurações** (nunca tiveram tela); Dashboard continua “Em breve” | Spec 014 / autora |
+| 2026-09-28 | Dashboard do painel em `/painel/dashboard`: cadastros A/P/E no período e adotados = exclusões de animais que estavam para adoção. Filtros 7 dias (`7d`), 1 mês (`30d`) e 3 meses (`90d`). Consome `GET /dashboard` (backend spec 014) | Spec 015 / autora |
 
 ---
 
@@ -443,6 +445,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Contato WhatsApp do responsável no detalhe + contato da ONG (spec 012)
 - [x] Comparação de similaridade no painel (spec 013)
 - [x] Remoção de Relatórios e Configurações do menu (spec 014)
+- [x] Dashboard do painel (spec 015)
 
 ---
 
@@ -475,3 +478,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Spec 013 web implementada: `/painel/similaridade`; comparação na hora após o JPEG; timeout 90 s; sem atalho nas listas A/P/E |
 | 2026-09-28 | Corte da comparação sobe para 60% na API (`minScore` 0,6); a tabela continua mostrando o que `POST /animais/comparar` devolve |
 | 2026-09-28 | Spec 014 web: Relatórios e Configurações saem da sidebar; Dashboard permanece desabilitado |
+| 2026-09-28 | Spec 015 web: Dashboard em `/painel/dashboard`; filtros 7 dias, 1 mês e 3 meses; adotados = exclusões de animais para adoção |

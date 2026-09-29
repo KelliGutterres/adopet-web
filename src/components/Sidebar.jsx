@@ -7,7 +7,7 @@ import styles from './Sidebar.module.css';
 const HOME = '/painel/animais/adocao';
 
 const NAV_ITEMS = [
-  { id: 'dashboard', label: 'Dashboard', disabled: true },
+  { id: 'dashboard', label: 'Dashboard', to: '/painel/dashboard' },
   { id: 'adocao', label: 'Animais para Adoção', to: '/painel/animais/adocao' },
   { id: 'encontrados', label: 'Animais Encontrados', to: '/painel/animais/encontrados' },
   { id: 'perdidos', label: 'Animais Perdidos', to: '/painel/animais/perdidos' },
