@@ -417,6 +417,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Resultados da comparação: a API devolve até 5 candidatos com score ≥ 60%; o painel lista só esses | Backend spec 012 |
 | 2026-09-28 | Web: menu do painel sem **Relatórios** e **Configurações** (nunca tiveram tela); Dashboard continua “Em breve” | Spec 014 / autora |
 | 2026-09-28 | Dashboard do painel em `/painel/dashboard`: cadastros A/P/E no período e adotados = exclusões de animais que estavam para adoção. Filtros 7 dias (`7d`), 1 mês (`30d`) e 3 meses (`90d`). Consome `GET /dashboard` (backend spec 014) | Spec 015 / autora |
+| 2026-09-30 | Rótulo da busca por foto: aba e título no mobile, menu e título no painel, passam a **Busca por Foto**. Rota `/painel/similaridade`, API e coluna de score permanecem | Autora |
 
 ---
 
@@ -479,3 +480,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Corte da comparação sobe para 60% na API (`minScore` 0,6); a tabela continua mostrando o que `POST /animais/comparar` devolve |
 | 2026-09-28 | Spec 014 web: Relatórios e Configurações saem da sidebar; Dashboard permanece desabilitado |
 | 2026-09-28 | Spec 015 web: Dashboard em `/painel/dashboard`; filtros 7 dias, 1 mês e 3 meses; adotados = exclusões de animais para adoção |
+| 2026-09-30 | Menu e título da busca por foto no painel, e aba e título no app, passam a **Busca por Foto** |
