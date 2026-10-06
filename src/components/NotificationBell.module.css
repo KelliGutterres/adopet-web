@@ -1,0 +1,166 @@
+.wrap {
+  position: relative;
+}
+
+.bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--painel-text);
+  cursor: pointer;
+}
+
+.bell:hover,
+.bell[aria-expanded='true'] {
+  background: var(--painel-primary-soft);
+  color: var(--painel-primary);
+}
+
+.bell:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+}
+
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--painel-danger);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 1.5rem));
+  max-height: 440px;
+  overflow: hidden;
+  border: 1px solid var(--painel-border);
+  border-radius: 12px;
+  background: var(--painel-surface);
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.12);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--painel-border);
+}
+
+.head strong {
+  font-size: 0.95rem;
+}
+
+.markAll {
+  border: none;
+  background: transparent;
+  color: var(--painel-primary);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.markAll:disabled {
+  color: var(--painel-muted);
+  cursor: default;
+}
+
+.markAll:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: 2px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+}
+
+.item,
+.static {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--painel-border);
+  background: #fff;
+  text-align: left;
+  padding: 0.85rem 1rem;
+}
+
+.item {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.item:hover {
+  background: #fafafa;
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--painel-primary);
+  outline-offset: -2px;
+}
+
+.unread {
+  background: var(--painel-primary-soft);
+}
+
+.unread:hover {
+  background: #efe4ff;
+}
+
+.title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.message {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--painel-text);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.meta {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--painel-muted);
+  font-size: 0.75rem;
+}
+
+.static {
+  color: var(--painel-muted);
+  font-size: 0.9rem;
+}
+
+.alert {
+  margin: 0;
+  color: var(--painel-danger);
+  font-size: 0.86rem;
+}

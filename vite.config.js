@@ -12,6 +12,7 @@ const apiProxy = {
   '/ongs': { target: API_TARGET, changeOrigin: true },
   '/usuarios': { target: API_TARGET, changeOrigin: true },
   '/dashboard': { target: API_TARGET, changeOrigin: true },
+  '/notificacoes': { target: API_TARGET, changeOrigin: true },
   '/health': { target: API_TARGET, changeOrigin: true },
 };
 

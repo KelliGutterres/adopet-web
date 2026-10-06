@@ -30,3 +30,4 @@ Ver `docs/CONTEXTO-PROJETO.md` (seção SDD).
 | [013](./013-comparacao-similaridade.md) | Comparação de similaridade no painel (RF0008) | aprovada e implementada |
 | [014](./014-remover-abas-relatorios-configuracoes.md) | Remover Relatórios e Configurações do menu | aprovada e implementada |
 | [015](./015-dashboard.md) | Dashboard do painel (métricas e filtro de período) | aprovada e implementada |
+| [016](./016-notificacoes.md) | Sino de notificações no header (cadastro de animal) | aprovada e implementada |

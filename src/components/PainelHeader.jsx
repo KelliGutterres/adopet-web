@@ -1,3 +1,4 @@
+import NotificationBell from './NotificationBell.jsx';
 import styles from './PainelHeader.module.css';
 
 function iniciaisOng(nome) {
@@ -26,6 +27,7 @@ export default function PainelHeader({ ongNome, onMenuClick }) {
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </button>
+      <NotificationBell />
       <div className={styles.profile}>
         <span className={styles.avatar} aria-hidden="true">
           {iniciaisOng(nome)}

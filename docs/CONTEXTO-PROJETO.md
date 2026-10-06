@@ -141,7 +141,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] Login (e-mail/senha) — RF0002
 - [ ] Cadastro/edição/exclusão de animais (nome, espécie, raça, idade, descrição, status, imagens) — RF0003
 - [ ] Listagem: adoção, perdidos, localizados/encontrados — RF0004
-- [ ] Filtros: situação, espécie, porte, idade, localização, status — RF0005
+- Filtros avançados (RF0005): **cancelados** em 2026-10-05. Não implementar. No painel permanecem busca + espécie + porte (no cliente); no app, a busca textual
 - [ ] Detalhes do animal (fotos, descrição, localização) — RF0006
 - [x] Upload por galeria ou câmera — RF0007 (mobile spec 012; web spec 011)
 - [x] Comparação inteligente de imagens — RF0008 (mobile spec 016; painel web spec 013; consome backend spec 012)
@@ -160,6 +160,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [x] Comparação de similaridade no painel (menu + foto → candidatos P/E) — RF0008 (spec 013)
 - [x] Menu do painel sem Relatórios e Configurações (spec 014)
 - [x] Dashboard do painel (cadastros A/P/E e adotados; 7 dias, 1 mês, 3 meses) — spec 015
+- [x] Sino de notificações no header (cadastro de animal por outra conta) — spec 016
 - [x] Tela de login web alinhada ao protótipo (spec 004; sem Google/Apple)
 - [x] Cadastro de ONG no painel web (spec 005)
 - [x] Esqueci a senha da ONG no painel web (spec 006)
@@ -172,7 +173,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 - [ ] CRUD usuários, instituições/ONGs, animais, etc.
 - [ ] Integração Supabase Storage (upload/recuperação; salvar só URL/referência no PostgreSQL)
 - [x] Integração com serviço Python de comparação de imagens — **API no backend spec 012**; UI do painel: **web spec 013**
-- [ ] Filtros e listagens conforme RF0004–RF0006
+- Filtros avançados (RF0005): **cancelados** em 2026-10-05. Listagens e detalhe (RF0004, RF0006) já entregues; `GET /animais` continua só com `?status=`
 
 ### Serviço de IA (Python — dentro de `adopet-backend`)
 - [x] Pasta `ai/` (ou similar) no mesmo repositório do backend
@@ -206,7 +207,7 @@ A IA **não** deve implementar feature sem spec correspondente em `specs/` (salv
 | RF0002 | Autenticar Usuário | Login com e-mail e senha | Obrigatória |
 | RF0003 | Manter Animais | ONGs e usuários cadastram, editam e excluem animais (nome, espécie, raça, idade, descrição, status, imagens) | Obrigatória |
 | RF0004 | Listagem de Animais | Lista de animais para adoção, perdidos e localizados | Obrigatória |
-| RF0005 | Filtros de Busca | Filtrar por situação, espécie, porte, idade, localização e status | Obrigatória |
+| RF0005 | Filtros de Busca | Filtrar por situação, espécie, porte, idade, localização e status. **Fora de escopo** desde 2026-10-05: não será implementado | Cancelado |
 | RF0006 | Detalhes do Animal | Fotos, descrição, localização e demais informações | Obrigatória |
 | RF0007 | Upload e Captura de Imagens | Galeria ou câmera do dispositivo | Obrigatória |
 | RF0008 | Comparação Inteligente de Imagens | Enviar imagem e comparar automaticamente com as já cadastradas | Obrigatória |
@@ -376,7 +377,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 ### Fase 2 — demais funcionalidades (depois do CRUD)
 
 6. Storage Supabase (imagens)
-7. Filtros avançados, perdidos/encontrados no mobile
+7. ~~Filtros avançados~~ — cancelados (2026-10-05). Perdidos/encontrados no mobile já entregues
 8. Upload/câmera (RF0007)
 9. Serviço de IA (RF0008)
 10. Polimento + documentação para a banca
@@ -418,6 +419,8 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Web: menu do painel sem **Relatórios** e **Configurações** (nunca tiveram tela); Dashboard continua “Em breve” | Spec 014 / autora |
 | 2026-09-28 | Dashboard do painel em `/painel/dashboard`: cadastros A/P/E no período e adotados = exclusões de animais que estavam para adoção. Filtros 7 dias (`7d`), 1 mês (`30d`) e 3 meses (`90d`). Consome `GET /dashboard` (backend spec 014) | Spec 015 / autora |
 | 2026-09-30 | Rótulo da busca por foto: aba e título no mobile, menu e título no painel, passam a **Busca por Foto**. Rota `/painel/similaridade`, API e coluna de score permanecem | Autora |
+| 2026-10-05 | RF0005 (filtros por idade, localização e painel de filtros) fica fora de escopo. Sem spec e sem query extra em `GET /animais`. No painel permanecem busca + espécie + porte no cliente | Autora |
+| 2026-10-05 | Sino no header do painel: avisos de cadastro de animal (A/P/E) feitos por outra conta. Consome `GET/PATCH /notificacoes` (backend spec 015). O cadastro da própria ONG não aparece para ela | Spec 016 |
 
 ---
 
@@ -447,6 +450,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 - [x] Comparação de similaridade no painel (spec 013)
 - [x] Remoção de Relatórios e Configurações do menu (spec 014)
 - [x] Dashboard do painel (spec 015)
+- [x] Filtros avançados (RF0005) — cancelados em 2026-10-05; não implementar
 
 ---
 
@@ -481,3 +485,5 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-28 | Spec 014 web: Relatórios e Configurações saem da sidebar; Dashboard permanece desabilitado |
 | 2026-09-28 | Spec 015 web: Dashboard em `/painel/dashboard`; filtros 7 dias, 1 mês e 3 meses; adotados = exclusões de animais para adoção |
 | 2026-09-30 | Menu e título da busca por foto no painel, e aba e título no app, passam a **Busca por Foto** |
+| 2026-10-05 | RF0005 cancelado: filtros avançados não serão implementados |
+| 2026-10-05 | Spec 016: sino de notificações no header do painel (cadastro de animal) |
