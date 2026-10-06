@@ -2,6 +2,7 @@
 
 > **Status:** aprovada e implementada (refinamento técnico fechado em 2026-09-19; código em 2026-09-28).  
 > **Atualização (2026-09-30):** o item do menu e o título da página passaram de **Comparação de Similaridade** para **Busca por Foto**, o mesmo rótulo da aba no mobile. A rota continua `/painel/similaridade`. A coluna da tabela segue **Similaridade** (o percentual).  
+> **Atualização (2026-10-05):** menu e título passam a **Busca por Imagem**, o mesmo rótulo da aba no mobile. Rota e coluna **Similaridade** permanecem.  
 > Depende de: spec 001 (rotas + `api.js`); spec 003 (sidebar + tabela + estados); spec 009 (`AnimalDetailPage`); spec 011 (`PhotoDropzone` + JPEG + `requestForm`); **backend spec 012** (`POST /animais/comparar`); **mobile spec 016** (mesmo contrato de UI/copy, canal diferente).  
 > **Não altera** o `adopet-backend` nesta fatia (contrato já na API 012; JWT `ong` já autorizado).  
 > **Não altera** o `adopet-mobile` (RF0008 no app já fechado na spec 016).  

@@ -102,7 +102,7 @@ export default function SimilarityPage() {
   return (
     <section className={styles.card}>
       <header className={styles.heading}>
-        <h1>Busca por Foto</h1>
+        <h1>Busca por Imagem</h1>
         <p>Envie uma foto para encontrar animais perdidos ou encontrados parecidos</p>
       </header>
 

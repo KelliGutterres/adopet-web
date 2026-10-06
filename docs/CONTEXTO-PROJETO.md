@@ -421,6 +421,7 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-30 | Rótulo da busca por foto: aba e título no mobile, menu e título no painel, passam a **Busca por Foto**. Rota `/painel/similaridade`, API e coluna de score permanecem | Autora |
 | 2026-10-05 | RF0005 (filtros por idade, localização e painel de filtros) fica fora de escopo. Sem spec e sem query extra em `GET /animais`. No painel permanecem busca + espécie + porte no cliente | Autora |
 | 2026-10-05 | Sino no header do painel: avisos de cadastro de animal (A/P/E) feitos por outra conta. Consome `GET/PATCH /notificacoes` (backend spec 015). O cadastro da própria ONG não aparece para ela | Spec 016 |
+| 2026-10-05 | Menu e título da busca por imagem no painel, e aba e título no app, passam a **Busca por Imagem**. Rota `/painel/similaridade` permanece | Autora |
 
 ---
 
@@ -487,3 +488,4 @@ Foco: **cadastro, edição e exclusão** (CRUD), com autenticação JWT.
 | 2026-09-30 | Menu e título da busca por foto no painel, e aba e título no app, passam a **Busca por Foto** |
 | 2026-10-05 | RF0005 cancelado: filtros avançados não serão implementados |
 | 2026-10-05 | Spec 016: sino de notificações no header do painel (cadastro de animal) |
+| 2026-10-05 | Menu e título da busca por imagem no painel, e aba e título no app, passam a **Busca por Imagem** |
